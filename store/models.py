@@ -12,7 +12,7 @@ class Store(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
 
-class Adress(models.Model):
+class Address(models.Model):
     city = models.CharField(max_length=255)
     street = models.CharField(max_length=255)
     store = models.OneToOneField(
