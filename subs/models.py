@@ -3,13 +3,14 @@ from datetime import timedelta
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from store.models import Store
 
+# Pouya's Implementation for Store model is imported, so the lines bellow are not needed anymore
+# class Store(models.Model):
+#     name = models.CharField(max_length=100)
 
-class Store(models.Model):
-    name = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.name
+#     def __str__(self):
+#         return self.name
 
 
 class Subscription(models.Model):
