@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'FastFeedBackend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'FastFeed',
+        'NAME': 'fastfeed',
         'USER': 'postgres',
         'PASSWORD': 'qweqwe',
         'HOST': 'localhost',
