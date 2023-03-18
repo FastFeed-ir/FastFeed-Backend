@@ -1,7 +1,7 @@
 
 # Sub API
 
-##POST
+## POST
 URL:
 ```
 http://localhost:8000/subs/
@@ -19,7 +19,7 @@ Status codes:
 201
 400
 ```
-##GET
+## GET
 URL:
 ```
 http://localhost:8000/subs/
@@ -30,7 +30,7 @@ Status codes:
 200
 404
 ```
-##PUT
+## PUT
 URL:
 ```
 http://localhost:8000/subs/<ID>/
@@ -48,7 +48,7 @@ Status codes:
 400
 404
 ```
-##DELETE
+## DELETE
 URL:
 ```
 http://localhost:8000/subs/
