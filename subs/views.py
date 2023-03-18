@@ -79,17 +79,11 @@ class SubscriptionDetail(APIView):
 
     def put(self, request, pk):
         subscription = self.get_object(pk)
-        extension = request.data.get('extension', None)
-        if extension is not None:
-            subscription.extend_subscription(extension)
-            serializer = SubscriptionSerializer(subscription)
+        serializer = SubscriptionSerializer(subscription,data=request.data)
+        if serializer.is_valid():
+            serializer.save()
             return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
-        else:
-            serializer = SubscriptionSerializer(subscription, data=request.data)
-            if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
         subscription = self.get_object(pk)

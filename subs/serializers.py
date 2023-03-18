@@ -1,3 +1,4 @@
+from django.utils import timezone
 from rest_framework import serializers
 from .models import Store, Subscription
 
@@ -13,24 +14,27 @@ class SubscriptionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Subscription
-        fields = ('id', 'store', 'period', 'amount', 'start_date', 'end_date', 'past_period', 'remaining', 'extension',
+        fields = ('id', 'store', 'period', 'amount', 'start_date', 'last_extension',
                   'created_at', 'updated_at')
-        read_only_fields = ('id', 'start_date', 'end_date', 'past_period', 'remaining', 'created_at', 'updated_at')
+        read_only_fields = ('id', 'start_date', 'created_at', 'updated_at')
 
-    # def create(self, validated_data):
-    #     store_id = validated_data.get('store')
-    #     period = validated_data.get('period')
-    #     amount = validated_data.get('amount')
-    #     store = Store.objects.get(pk=store_id)
-    #     subscription = Subscription(store=store, period=period, amount=amount)
-    #     subscription.save()
-    #     return subscription
+    def create(self, validated_data):
+        object = super().create(validated_data)
+        object.created_at = timezone.now()
+        object.start_date = object.created_at.date()
+        object.last_extension = 0
+        object.save()
+        return object
 
     def update(self, instance, validated_data):
-        extension = validated_data.get('extension')
-        if extension is not None:
-            instance.extend_subscription(extension)
-        instance.amount = validated_data.get('amount', instance.amount)
-        instance.period = validated_data.get('period', instance.period)
-        instance.save()
-        return instance
+        oldCA = instance.created_at
+        oldPeriod = instance.period
+        oldAmount = instance.amount
+        object = super().update(instance, validated_data)
+        object.created_at = oldCA
+        object.updated_at = timezone.now()
+        object.amount = oldAmount + instance.amount
+        object.period = oldPeriod + instance.last_extension
+
+        object.save()
+        return object
