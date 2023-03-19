@@ -33,7 +33,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to='products_images/')
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    quantity = models.PositiveSmallIntegerField()
+    inventory = models.PositiveSmallIntegerField()
     is_available = models.BooleanField(default=False)
     is_featured = models.BooleanField(default=False)
     discount_percentage = models.DecimalField(max_digits=5, decimal_places=2)
