@@ -20,5 +20,6 @@ import subs
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('subs.urls'))
+    path('',include('subs.urls')),
+    path('', include('crowner.urls'))
 ]

@@ -13,7 +13,6 @@ class Store(models.Model):
     def __str__(self):
         return self.name
 
-
 class Subscription(models.Model):
     store = models.ForeignKey(Store, on_delete=models.CASCADE,null=True)
     period = models.PositiveIntegerField(default=0)

@@ -45,7 +45,8 @@ INSTALLED_APPS = [
 
     'subs',
     'store',
-    'comments'
+    'comments',
+    'crowner'
 
 ]
 
@@ -86,7 +87,7 @@ WSGI_APPLICATION = 'FastFeedBackend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'fastfeed',
+        'NAME': 'FastFeed',
         'USER': 'postgres',
         'PASSWORD': 'qweqwe',
         'HOST': 'localhost',
