@@ -3,6 +3,7 @@ from django.db import models
 
 class Store(models.Model):
     title = models.CharField(max_length=255)
+    slug = models.SlugField(default='-')
     logo = models.ImageField(upload_to='logo_images/')
     telephone_number = models.CharField(max_length=20)
     tables_count = models.PositiveSmallIntegerField()
@@ -21,12 +22,14 @@ class Address(models.Model):
 
 class Collection(models.Model):
     title = models.CharField(max_length=255)
+    slug = models.SlugField(default='-')
     store = models.ForeignKey(Store, on_delete=models.CASCADE)
     is_featured = models.BooleanField(default=False)
 
 
 class Product(models.Model):
     title = models.CharField(max_length=255)
+    slug = models.SlugField(default='-')
     image = models.ImageField(upload_to='products_images/')
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
