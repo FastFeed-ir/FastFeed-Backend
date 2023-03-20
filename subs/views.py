@@ -79,7 +79,7 @@ class SubscriptionDetail(APIView):
 
     def put(self, request, pk):
         subscription = self.get_object(pk)
-        serializer = SubscriptionSerializer(subscription,data=request.data)
+        serializer = SubscriptionSerializer(subscription, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
