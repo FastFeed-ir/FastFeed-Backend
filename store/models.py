@@ -11,8 +11,8 @@ class Store(models.Model):
     city = models.CharField(max_length=255)
     address = models.TextField(null=False, blank=False)
     subscription_factor = models.DecimalField(max_digits=5, decimal_places=2)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
 
 
 class Collection(models.Model):
@@ -20,8 +20,8 @@ class Collection(models.Model):
     store = models.ForeignKey(
         Store, on_delete=models.CASCADE, related_name='collections')
     is_featured = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
 
 
 class Product(models.Model):
@@ -36,14 +36,14 @@ class Product(models.Model):
     store = models.ForeignKey(Store, on_delete=models.CASCADE)
     collection = models.ForeignKey(
         Collection, on_delete=models.CASCADE, related_name='products')
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
 
 
 class Comment(models.Model):
     name = models.CharField(max_length=255)
     content = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     product = models.ForeignKey(
         Product, on_delete=models.CASCADE, related_name='comments')
 
