@@ -291,6 +291,8 @@ Data example:
   "discount_percentage": 27,
   "store": "Brookfield Infrastructure Partners LP",
   "collection": "cakes"
+  "created_at": 2021-08-14 14:25:00
+  "updated_at": 2021-08-14 14:25:00
 }
 ```
 Status codes:
@@ -327,6 +329,8 @@ Data example:
   "discount_percentage": 27,
   "store": "Brookfield Infrastructure Partners LP",
   "collection": "cakes"
+  "created_at": 2021-08-14 14:25:00
+  "updated_at": 2021-08-14 14:25:00
 }
 ```
 Status codes:
@@ -360,6 +364,7 @@ Data example:
   "name": "Ardis Hamman",
   "content": "Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.\n\nMaecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.",
   "product": "chocolate cake"
+  "created_at": 2021-08-14 14:25:00
 }
 ```
 Status codes:
