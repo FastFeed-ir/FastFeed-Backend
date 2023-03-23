@@ -12,6 +12,7 @@ class Store(models.Model):
     address = models.TextField(null=False, blank=False)
     subscription_factor = models.DecimalField(max_digits=5, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 
 class Collection(models.Model):
@@ -19,6 +20,8 @@ class Collection(models.Model):
     store = models.ForeignKey(
         Store, on_delete=models.CASCADE, related_name='collections')
     is_featured = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 
 class Product(models.Model):

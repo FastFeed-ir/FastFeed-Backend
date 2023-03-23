@@ -7,15 +7,15 @@ class StoreSerializer(serializers.ModelSerializer):
         model = Store
         fields = ['id', 'title', 'logo', 'telephone_number', 'tables_count',
                   'instagram_page_link', 'telegram_channel_link', 'city',
-                  'address', 'subscription_factor', 'created_at']
-        read_only_fields = ['id', 'created_at']
+                  'address', 'subscription_factor', 'created_at', 'updated_at']
+        read_only_fields = ['id', 'created_at', 'updated_at']
 
 
 class CollectionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Collection
-        fields = ['id', 'title', 'store']
-        read_only_fields = ['id']
+        fields = ['id', 'title', 'store', 'created_at', 'updated_at']
+        read_only_fields = ['id', 'created_at', 'updated_at']
 
 
 class ProductSerializer(serializers.ModelSerializer):
