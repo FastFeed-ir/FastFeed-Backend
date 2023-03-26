@@ -13,23 +13,23 @@ async def resturant_server(websocket, path):
     resturants[code].add(websocket)
 
     try:
-        async for message in websocket:
-            print(f"Received message: {message}")
+        async for order in websocket:
+            print(f"Received order: {order}")
             try:
-                data = json.loads(message)
+                data = json.loads(order)
                 for client in resturants[code]:
                     if client != websocket:
-                        await client.send(json.dumps({'message': data['message']}))
-                        print(f"Sended message: {message}!")
+                        await client.send(json.dumps({'order': data['order']}))
+                        print(f"Sended order: {order}!")
             except json.JSONDecodeError:
-                print(f"Invalid message: {message}!")
+                print(f"Invalid order: {order}!")
     finally:
         resturants[code].remove(websocket)
 
 async def main():
     port=3000
     async with websockets.serve(resturant_server, 'localhost', port):
-        print(f"Server connected at Port {port} seccesefullly!")
+        print(f"Server connected at Port {port} seccesefully!")
         await asyncio.Future()  # run forever
 
 if __name__ == '__main__':
