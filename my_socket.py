@@ -7,9 +7,9 @@ async def chat_server(websocket, path):
     code = path.split('/')[-1]
     if code not in resturants:
         resturants[code] = set()
-        print(f"Room with code = {code} craeted successful")
+        print(f"Room with code = {code} craeted successfully!")
 
-    else: print(f"A new user added to Room{code}.")
+    else: print(f"A new user added to Room{code}!")
     resturants[code].add(websocket)
 
     try:
@@ -20,16 +20,16 @@ async def chat_server(websocket, path):
                 for client in resturants[code]:
                     if client != websocket:
                         await client.send(json.dumps({'message': data['message']}))
-                        print(f"Sended message: {message}")
+                        print(f"Sended message: {message}!")
             except json.JSONDecodeError:
-                print(f"Invalid message: {message}")
+                print(f"Invalid message: {message}!")
     finally:
         resturants[code].remove(websocket)
 
 async def main():
     port=3000
     async with websockets.serve(chat_server, 'localhost', port):
-        print(f"Server connected at Port {port} secceseful")
+        print(f"Server connected at Port {port} seccesefullly!")
         await asyncio.Future()  # run forever
 
 if __name__ == '__main__':
