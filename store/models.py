@@ -1,12 +1,15 @@
 from django.db import models
 from django.utils import timezone
+from utilities.constants import BUSINESS_TYPE_CHOICES,STATE_CHOICES
 
 
 class Store(models.Model):
     title = models.CharField(max_length=255)
     logo = models.ImageField(upload_to='logo_images/', null=True)
+    business_type = models.IntegerField(choices=BUSINESS_TYPE_CHOICES, default=1)
 
     address = models.TextField(null=False, blank=False)
+    state = models.IntegerField(choices=STATE_CHOICES, default=8)
     city = models.CharField(max_length=255)
     telephone_number = models.CharField(max_length=20)
 

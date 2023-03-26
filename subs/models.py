@@ -18,6 +18,7 @@ class Subscription(models.Model):
     def save(self, *args, **kwargs):
         if not self.id:
             self.created_at = timezone.now()
+            self.start_date=self.created_at.date()
             return super().save(*args, **kwargs)
         self.updated_at = timezone.now()
         return super().save(*args, **kwargs)

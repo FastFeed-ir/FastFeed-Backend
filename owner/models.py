@@ -3,18 +3,6 @@ from django.utils import timezone
 
 
 class BusinessOwner(models.Model):
-    CAFE = 'Cafe'
-    RESTAURANT = 'Restaurant'
-    BUSINESS_TYPE_CHOICES = [
-        (CAFE, 'Cafe'),
-        (RESTAURANT, 'Restaurant'),
-    ]
-
-    business_type = models.CharField(
-        max_length=20,
-        choices=BUSINESS_TYPE_CHOICES,
-        default=RESTAURANT,
-    )
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     phone_number = models.CharField(max_length=20)
