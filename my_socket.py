@@ -3,7 +3,7 @@ import json
 import websockets
 resturants = {}
 
-async def chat_server(websocket, path):
+async def resturant_server(websocket, path):
     code = path.split('/')[-1]
     if code not in resturants:
         resturants[code] = set()
@@ -28,7 +28,7 @@ async def chat_server(websocket, path):
 
 async def main():
     port=3000
-    async with websockets.serve(chat_server, 'localhost', port):
+    async with websockets.serve(resturant_server, 'localhost', port):
         print(f"Server connected at Port {port} seccesefullly!")
         await asyncio.Future()  # run forever
 
