@@ -1,26 +1,20 @@
-"""FastFeedBackend URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 
-import subs
+from rest_framework.routers import DefaultRouter
+from store import views as store
+from subs import views as subscription
+from owner import views as owner
+
+router = DefaultRouter()
+router.register('stores', store.StoreViewSet)
+router.register('collections', store.CollectionViewSet)
+router.register('products', store.ProductViewSet)
+router.register('comments', store.CommentViewSet)
+router.register('subscriptions', subscription.SubscriptionViewSet)
+router.register('owners', owner.BusinessOwnerViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('subs.urls')),
-    path('', include('crowner.urls')),
-    path('', include('store.urls'))
 ]
+urlpatterns += router.urls
