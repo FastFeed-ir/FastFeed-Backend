@@ -6,4 +6,3 @@ from rest_framework.viewsets import ModelViewSet
 class BusinessOwnerViewSet(ModelViewSet):
     queryset = BusinessOwner.objects.all()
     serializer_class = BusinessOwnerSerializer
-    http_method_names = ['get', 'post', 'put', 'delete']

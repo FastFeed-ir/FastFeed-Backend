@@ -1,36 +1,33 @@
-import asyncio
-import json
-import websockets
-resturants = {}
+from flask import Flask, render_template
+from flask_socketio import SocketIO, join_room, leave_room, emit
 
-async def resturant_server(websocket, path):
-    code = path.split('/')[-1]
-    if code not in resturants:
-        resturants[code] = set()
-        print(f"Room with code = {code} craeted successfully!")
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'secret!'
+socketio = SocketIO(app, cors_allowed_origins='*')
 
-    else: print(f"A new user added to Room{code}!")
-    resturants[code].add(websocket)
+@app.route('/')
+def index():
+    return render_template('index.html')
 
-    try:
-        async for order in websocket:
-            print(f"Received order: {order}")
-            try:
-                data = json.loads(order)
-                for client in resturants[code]:
-                    if client != websocket:
-                        await client.send(json.dumps({'order': data['order']}))
-                        print(f"Sended order: {order}!")
-            except json.JSONDecodeError:
-                print(f"Invalid order: {order}!")
-    finally:
-        resturants[code].remove(websocket)
+@socketio.on('join')
+def handle_join(code):
+    join_room(code)
+    print(f'A new user join room {code}!')
 
-async def main():
-    port=3000
-    async with websockets.serve(resturant_server, 'localhost', port):
-        print(f"Server connected at Port {port} seccesefully!")
-        await asyncio.Future()  # run forever
+@socketio.on('leave')
+def handle_leave(code):
+    leave_room(code)
+    print(f'A user leave room {code}!')
+
+
+@socketio.on('message')
+def handle_message(data):
+    message = data.get('message')
+    code = data.get('code')
+    print(f'recived massage : {data}')
+    if message and code:
+        emit('message', {'message': message}, room=code)
 
 if __name__ == '__main__':
-    asyncio.run(main())
+    socketio.run(app, debug=True)
+
