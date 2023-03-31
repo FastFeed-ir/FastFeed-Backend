@@ -7,7 +7,7 @@ from owner.models import BusinessOwner
 class Store(models.Model):
     title = models.CharField(max_length=255)
     logo = models.ImageField(upload_to='logo_images/', null=True)
-    business_type = models.IntegerField(choices=BUSINESS_TYPE_CHOICES, default=1)
+    business_type = models.IntegerField(choices=BUSINESS_TYPE_CHOICES, default=1, null=False, blank=False)
     business_owner = models.OneToOneField(BusinessOwner, on_delete=models.CASCADE, related_name='stores')
 
     address = models.TextField(null=False, blank=False)
@@ -61,7 +61,7 @@ class Product(models.Model):
     unit_price = models.DecimalField(max_digits=10, decimal_places=2)
 
     inventory = models.PositiveSmallIntegerField()
-    is_available = models.BooleanField(default=False)
+    is_available = models.BooleanField(default=False, null=False, blank=False)
     is_featured = models.BooleanField(default=False)
     discount_percentage = models.DecimalField(max_digits=5, decimal_places=2)
 
