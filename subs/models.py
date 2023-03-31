@@ -12,8 +12,8 @@ directory = os.getenv("QR_CODE_DIR")
 
 class Subscription(models.Model):
     store = models.ForeignKey(store.Store, on_delete=models.CASCADE)
-    period = models.PositiveIntegerField(default=0)
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    period = models.PositiveIntegerField()
+    amount = models.DecimalField(max_digits=20, decimal_places=3)
     url = models.CharField(null=True, blank=True, max_length=64)
 
     start_date = models.DateField(auto_now_add=True, null=True)
