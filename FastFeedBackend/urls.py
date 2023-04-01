@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path
 
 from rest_framework.routers import DefaultRouter
+from rest_framework.authtoken import views
 from store import views as store
 from subs import views as subscription
 from order import views as order

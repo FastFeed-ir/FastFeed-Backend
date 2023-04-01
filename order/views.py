@@ -6,3 +6,5 @@ from order.models import Order
 class OrderViewSet(ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
+    search_fields=('')
+    ordering_fields='__all__'
