@@ -1,6 +1,6 @@
 from django.db import models
 from store.models import Product
-
+from django.utils import timezone
 class my_Rating(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     score = models.IntegerField(choices=[(i, i) for i in range(1, 6)])

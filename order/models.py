@@ -1,7 +1,7 @@
 from django.db import models
 from store.models import Store , Product
 import random
-
+from django.utils import timezone
 class Order(models.Model):
     store = models.ForeignKey(Store, on_delete=models.CASCADE)
     products = models.JSONField()
