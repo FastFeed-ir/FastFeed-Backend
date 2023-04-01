@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Store, Collection, Product, Comment
+from store.models import Store
 
 
 class StoreSerializer(serializers.ModelSerializer):
@@ -7,24 +7,3 @@ class StoreSerializer(serializers.ModelSerializer):
         model = Store
         fields = '__all__'
         read_only_fields = ('id', 'created_at', 'updated_at','subscription_factor')
-
-
-class CollectionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Collection
-        fields = '__all__'
-        read_only_fields = ['id', 'created_at', 'updated_at']
-
-
-class ProductSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Product
-        fields ='__all__'
-        read_only_fields = ['id', 'created_at', 'updated_at','store']
-
-
-class CommentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Comment
-        fields = '__all__'
-        read_only_fields = ['id', 'created_at']
