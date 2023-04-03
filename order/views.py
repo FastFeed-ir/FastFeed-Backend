@@ -1,10 +1,13 @@
-from order.serializers import OrderSerializer
-from rest_framework.viewsets import ModelViewSet
-from order.models import Order
+from rest_framework import generics
+from .models import Order
+from .serializers import OrderSerializer
 
 
-class OrderViewSet(ModelViewSet):
+class OrderListCreateView(generics.ListCreateAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
-    search_fields=('')
-    ordering_fields='__all__'
+
+
+class OrderRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
