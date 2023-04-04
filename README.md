@@ -393,3 +393,8 @@ Status codes:
 204
 404
 ```
+
+##SMS verification activation
+Sign in to sms.ir
+Install smsir in project(no need to add it to INSTALLED_APPS)
+Set SMSIR_API_KEY, SMSIR_PHONE_NUMBER, SMSIR_API_URL values in the settings.py module, based on your sms.ir account
