@@ -6,7 +6,7 @@ import random
 from FastFeedBackend import settings
 
 
-class BusinessOwner(models.Model, AbstractUser):
+class BusinessOwner(AbstractUser,models.Model ):
     first_name = models.CharField(max_length=50, null=True)
     last_name = models.CharField(max_length=50, null=True)
     username = models.CharField(max_length=50, unique=True)

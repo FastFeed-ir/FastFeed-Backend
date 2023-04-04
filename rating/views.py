@@ -1,6 +1,6 @@
-from my_rating.serializers import RatingSerializer
+from rating.serializers import RatingSerializer
 from rest_framework.viewsets import ModelViewSet
-from my_rating.models import my_Rating
+from rating.models import my_Rating
 
 
 class RatingViewSet(ModelViewSet):

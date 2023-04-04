@@ -1,5 +1,5 @@
 from django.db import models
-from store.models import Product
+from product.models import Product
 from django.utils import timezone
 class my_Rating(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)

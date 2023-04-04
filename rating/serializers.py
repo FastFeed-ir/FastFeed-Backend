@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from my_rating.models import my_Rating
+from rating.models import my_Rating
 
 class RatingSerializer(serializers.ModelSerializer):
     class Meta:

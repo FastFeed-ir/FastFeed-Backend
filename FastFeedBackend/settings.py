@@ -32,8 +32,11 @@ INSTALLED_APPS = [
     'subs',
     'store',
     'owner',
-    'my_rating',
-    'order'
+    'rating',
+    'order',
+    'collection',
+    'comment',
+    'product'
 ]
 
 REST_FRAMEWORK = {
