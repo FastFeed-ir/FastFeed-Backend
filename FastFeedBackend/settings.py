@@ -1,4 +1,3 @@
-
 from pathlib import Path
 import os
 from dotenv import load_dotenv
@@ -18,7 +17,6 @@ SECRET_KEY = 'django-insecure-=khkw8h@=)9smjtbi)z9i_d&#!22n3xbx22clow+x!81yv2d!x
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -92,6 +90,9 @@ DATABASES = {
     }
 }
 
+# use BusinessOwner model instead of the default User model
+AUTH_USER_MODEL = 'owner.BusinessOwner'
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -115,8 +116,11 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 STATIC_URL = 'static/'
 
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# sms.ir variables
+SMSIR_API_KEY = ''
+SMSIR_PHONE_NUMBER = ''
+SMSIR_API_URL = ''
