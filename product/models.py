@@ -11,9 +11,9 @@ class Product(models.Model):
     unit_price = models.DecimalField(max_digits=15, decimal_places=3, verbose_name="قیمت")
 
     inventory = models.PositiveSmallIntegerField(null=True, verbose_name="تعداد(اختیاری)")
-    is_available = models.BooleanField(default=False, null=False, blank=False, verbose_name="موجود")
-    is_featured = models.BooleanField(default=False, null=True, verbose_name="پیشنهادی(اختیاری)")
-    discount_percentage = models.DecimalField(max_digits=5, decimal_places=2, default=0.0, verbose_name="درصد تخفیف")
+    is_available = models.BooleanField(default=False, null=False, blank=False, verbose_name="فعال بودن")
+    is_featured = models.BooleanField(default=False, null=True, verbose_name="پیشنهادی بودن(اختیاری)")
+    discount_percentage = models.DecimalField(null=True,max_digits=5, decimal_places=2, default=0.0, verbose_name="درصد تخفیف(اختیاری)")
 
     store = models.ForeignKey(Store, on_delete=models.CASCADE, blank=True, verbose_name="فروشگاه")
     collection = models.ForeignKey(Collection, on_delete=models.CASCADE, related_name='products', verbose_name="دسته بندی")

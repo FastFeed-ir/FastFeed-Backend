@@ -5,7 +5,7 @@ from product.models import Product
 
 class Comment(models.Model):
     name = models.CharField(max_length=32, default='ناشناس', verbose_name="نام")
-    content = models.CharField(max_length=1024, verbose_name="متن")
+    content = models.CharField(max_length=1024, verbose_name="متن نظر")
 
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='comments', verbose_name="محصول")
 

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Order
+from .models import Order,OrderItem
 admin.site.register(Order)
-# Register your models here.
+admin.site.register(OrderItem)
 

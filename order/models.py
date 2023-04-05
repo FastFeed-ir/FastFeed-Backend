@@ -1,4 +1,5 @@
 import random
+
 from django.db import models
 from django.utils import timezone
 from product.models import Product
@@ -6,12 +7,16 @@ from store.models import Store
 
 
 class Order(models.Model):
-    store = models.ForeignKey(Store, on_delete=models.CASCADE, related_name='orders',verbose_name="فروشگاه")
-    table_number = models.IntegerField()
-    description = models.TextField(max_length=255,null= True,verbose_name="توضیحات سفارش(اختیاری)")
-    total_amount = models.DecimalField(max_digits=10, decimal_places=2,verbose_name="جمع کل")
-    auth_code = models.IntegerField(verbose_name="کد تایید")
+    store = models.ForeignKey(Store, on_delete=models.CASCADE, related_name='orders', verbose_name="فروشگاه")
+    table_number = models.PositiveSmallIntegerField()
+    description = models.TextField(max_length=255, null=True, verbose_name="توضیحات سفارش(اختیاری)")
+    total_amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="مبلغ کل")
+    auth_code = models.IntegerField(verbose_name="کد احرازهویت")
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+
+    class Meta:
+        verbose_name_Plural = "سفارشات"
+        verbose_name = "سفارش"
 
     def save(self, *args, **kwargs):
         if not self.id:
@@ -25,14 +30,15 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items',verbose_name="سفارش")
-    product = models.ForeignKey(Product, on_delete=models.CASCADE,verbose_name="محصول")
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items', verbose_name="سفارش")
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="محصول")
     quantity = models.PositiveSmallIntegerField(verbose_name="تعداد")
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     class Meta:
-        verbose_name_Plural = "سفارشات"
-        verbose_name = "سفارش"
+        verbose_name_Plural = "آیتم های سفارش"
+        verbose_name = "آیتم سفارش"
+
     def save(self, *args, **kwargs):
         if not self.id:
             self.created_at = timezone.now()
