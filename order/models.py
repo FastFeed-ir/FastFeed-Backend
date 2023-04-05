@@ -1,5 +1,4 @@
 import random
-
 from django.db import models
 from django.utils import timezone
 from product.models import Product
@@ -7,13 +6,11 @@ from store.models import Store
 
 
 class Order(models.Model):
-    store = models.ForeignKey(Store, on_delete=models.CASCADE, related_name='orders')
+    store = models.ForeignKey(Store, on_delete=models.CASCADE, related_name='orders',verbose_name="فروشگاه")
     table_number = models.IntegerField()
-    description = models.TextField(max_length=255)
-
-    total_amount = models.DecimalField(max_digits=10, decimal_places=2)
-    auth_code = models.IntegerField()
-
+    description = models.TextField(max_length=255,null= True,verbose_name="توضیحات سفارش(اختیاری)")
+    total_amount = models.DecimalField(max_digits=10, decimal_places=2,verbose_name="جمع کل")
+    auth_code = models.IntegerField(verbose_name="کد تایید")
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     def save(self, *args, **kwargs):
@@ -28,13 +25,14 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
-
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.PositiveSmallIntegerField()
-
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items',verbose_name="سفارش")
+    product = models.ForeignKey(Product, on_delete=models.CASCADE,verbose_name="محصول")
+    quantity = models.PositiveSmallIntegerField(verbose_name="تعداد")
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
+    class Meta:
+        verbose_name_Plural = "سفارشات"
+        verbose_name = "سفارش"
     def save(self, *args, **kwargs):
         if not self.id:
             self.created_at = timezone.now()
