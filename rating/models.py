@@ -1,6 +1,8 @@
 from django.db import models
-from product.models import Product
 from django.utils import timezone
+from product.models import Product
+
+
 class my_Rating(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     score = models.IntegerField(choices=[(i, i) for i in range(1, 6)])
@@ -10,8 +12,6 @@ class my_Rating(models.Model):
         if not self.id:
             self.created_at = timezone.now()
             return super().save(*args, **kwargs)
-        self.updated_at = timezone.now()
-        return super().save(*args, **kwargs)
 
     def __str__(self):
         return f'{self.product} - {self.score}'

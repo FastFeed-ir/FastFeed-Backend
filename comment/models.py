@@ -15,8 +15,6 @@ class Comment(models.Model):
         if not self.id:
             self.created_at = timezone.now()
             return super().save(*args, **kwargs)
-        self.updated_at = timezone.now()
-        return super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.product} from {self.name} : {self.amount}"

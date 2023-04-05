@@ -1,7 +1,7 @@
+from collection.models import Collection
 from django.db import models
 from django.utils import timezone
 from store.models import Store
-from collection.models import Collection
 
 
 class Product(models.Model):
@@ -19,7 +19,7 @@ class Product(models.Model):
     collection = models.ForeignKey(Collection, on_delete=models.CASCADE, related_name='products')
 
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
-    updated_at = models.DateTimeField(null=True, blank=True)
+    updated_at = models.DateTimeField(editable=False, null=True, blank=True)
 
     def save(self, *args, **kwargs):
         if not self.id:

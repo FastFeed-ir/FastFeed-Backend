@@ -1,45 +1,33 @@
+import jdatetime
 from django.db import models
-from store import models as store
 from django.utils import timezone
-import qrcode
-import os
-from dotenv import load_dotenv
-from django.conf import settings
+from store import models as store
 
-load_dotenv()
-
-directory = os.getenv("QR_CODE_DIR")
 
 class Subscription(models.Model):
-    store = models.ForeignKey(store.Store, on_delete=models.CASCADE)
-    period = models.PositiveIntegerField()
-    amount = models.DecimalField(max_digits=20, decimal_places=3)
-    url = models.CharField(null=True, blank=True, max_length=64)
+    store = models.ForeignKey(store.Store, on_delete=models.CASCADE, verbose_name="فروشگاه")
+    period = models.PositiveIntegerField(verbose_name="دوره زمانی(به روز)")
+    amount = models.DecimalField(max_digits=20, decimal_places=3, verbose_name="قیمت کل(به تومان)")
+    url = models.CharField(null=True, blank=True, max_length=64, verbose_name="آدرس اینترنتی فروشگاه در فست فید")
 
-    start_date = models.DateField(auto_now_add=True, null=True)
+    start_date = models.CharField(null=True, verbose_name="تاریخ شروع اشتراک", max_length=10)
 
     created_at = models.DateTimeField(auto_now_add=True, null=True)
-    updated_at = models.DateTimeField(null=True, blank=True)
+    updated_at = models.DateTimeField(editable=False, null=True, blank=True)
+
+    class Meta:
+        verbose_name_plural = "اشتراک ها"
+        verbose_name = "اشتراک"
 
     def save(self, *args, **kwargs):
         if not self.id:
             self.created_at = timezone.now()
-            self.start_date = self.created_at.date()
+            shamsi_date = jdatetime.date.fromgregorian(date=self.created_at.date())
+            self.start_date = shamsi_date.strftime('%Y/%m/%d')
             self.url = f"http://FastFeed.ir/{self.store.business_type}/{self.store.id}/"
-            super().save(*args, **kwargs)
-            qr_code = qrcode.make(self.url)
-            filename = os.path.join(settings.MEDIA_ROOT, directory, f"{self.id}.png")
-            qr_code.save(filename)
         else:
             self.updated_at = timezone.now()
-            super().save(*args, **kwargs)
-
-    def delete(self, *args, **kwargs):
-        img_name = f"{self.id}.png"
-        img_path = os.path.join(settings.MEDIA_ROOT, directory, img_name)
-        if os.path.exists(img_path):
-            os.remove(img_path)
-        super().delete(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.store}.{self.period}day = {self.amount}"
+        return f"{self.store}.{self.period}روز = {self.amount}T"

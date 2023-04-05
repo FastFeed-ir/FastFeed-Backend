@@ -1,21 +1,27 @@
 from django.db import models
 from django.utils import timezone
+
+
 # from django.contrib.auth.models import AbstractUser
 # import requests
 # import random
 # from FastFeedBackend import settings
 
 
-class BusinessOwner(models.Model ):
-    first_name = models.CharField(max_length=50, null=True)
-    last_name = models.CharField(max_length=50, null=True)
+class BusinessOwner(models.Model):
+    first_name = models.CharField(max_length=50, null=True, verbose_name="نام(اختیاری)")
+    last_name = models.CharField(max_length=50, null=True, verbose_name="نام خانوادگی(اختیاری)")
     # username = models.CharField(max_length=50, unique=True)
     # password = models.CharField(max_length=50)
-    phone_number = models.CharField(max_length=20, unique=True)
+    phone_number = models.CharField(max_length=20, unique=True, verbose_name="شماره تلفن")
     # verification_code = models.CharField(max_length=6, null=True, blank=True)
 
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
-    updated_at = models.DateTimeField(null=True, blank=True)
+    updated_at = models.DateTimeField(editable=False, null=True, blank=True)
+
+    class Meta:
+        verbose_name_plural = "مالکان فروشگاه"
+        verbose_name = "مالک فروشگاه"
 
     def __str__(self):
         if self.first_name:
@@ -28,8 +34,8 @@ class BusinessOwner(models.Model ):
             self.created_at = timezone.now()
             # self.verification_code = self.generate_verification_code()
             # self.send_verification_sms
-            return super().save(*args, **kwargs)
-        self.updated_at = timezone.now()
+        else:
+            self.updated_at = timezone.now()
         return super().save(*args, **kwargs)
 
     # @staticmethod

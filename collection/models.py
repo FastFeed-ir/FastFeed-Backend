@@ -9,7 +9,7 @@ class Collection(models.Model):
     is_featured = models.BooleanField(default=False, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
-    updated_at = models.DateTimeField(null=True, blank=True)
+    updated_at = models.DateTimeField(editable=False, null=True, blank=True)
 
     def save(self, *args, **kwargs):
         if not self.id:
