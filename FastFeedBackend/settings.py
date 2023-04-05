@@ -19,12 +19,15 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'admin_interface',
+    'colorfield',
+    'django.contrib.admin',
 
     'rest_framework',
     'rest_framework.authtoken',
@@ -38,6 +41,9 @@ INSTALLED_APPS = [
     'comment',
     'product'
 ]
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+SILENCED_SYSTEM_CHECKS = ['security.W019']
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -111,7 +117,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fa'
 
 TIME_ZONE = 'UTC'
 
@@ -124,6 +130,6 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # sms.ir variables
-SMSIR_API_KEY = ''
-SMSIR_PHONE_NUMBER = ''
-SMSIR_API_URL = ''
+# SMSIR_API_KEY = ''
+# SMSIR_PHONE_NUMBER = ''
+# SMSIR_API_URL = ''
