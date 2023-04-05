@@ -11,6 +11,11 @@ class Collection(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated_at = models.DateTimeField(editable=False, null=True, blank=True)
 
+    class Meta:
+        verbose_name_plural = "دسته بندی ها"
+        verbose_name = "دسته بندی"
+
+
     def save(self, *args, **kwargs):
         if not self.id:
             self.created_at = timezone.now()
