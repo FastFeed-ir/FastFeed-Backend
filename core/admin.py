@@ -16,3 +16,5 @@ class AdminUser(BaseUserAdmin):
     #     ),
     # )
 
+
+admin.site.register(User)
