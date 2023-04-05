@@ -4,12 +4,17 @@ from product.models import Product
 
 
 class Comment(models.Model):
-    name = models.CharField(max_length=32, default='ناشناس')
-    content = models.TextField()
+    name = models.CharField(max_length=32, default='ناشناس', verbose_name="نام")
+    content = models.CharField(max_length=1024, verbose_name="متن")
 
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='comments')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='comments', verbose_name="محصول")
 
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+
+    class Meta:
+        verbose_name_plural = "نظرات"
+        verbose_name = "نظر"
+
 
     def save(self, *args, **kwargs):
         if not self.id:
