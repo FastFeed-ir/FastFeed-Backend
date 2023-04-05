@@ -94,7 +94,7 @@ DATABASES = {
 }
 
 # use BusinessOwner model instead of the default User model
-AUTH_USER_MODEL = 'owner.BusinessOwner'
+# AUTH_USER_MODEL = 'owner.BusinessOwner'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
