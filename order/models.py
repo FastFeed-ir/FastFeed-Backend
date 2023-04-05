@@ -2,6 +2,7 @@ import random
 
 from django.db import models
 from django.utils import timezone
+from jdatetime import datetime as jdatetime_datetime
 from product.models import Product
 from store.models import Store
 
@@ -10,23 +11,26 @@ class Order(models.Model):
     store = models.ForeignKey(Store, on_delete=models.CASCADE, related_name='orders', verbose_name="فروشگاه")
     table_number = models.PositiveSmallIntegerField()
     description = models.TextField(max_length=255, null=True, verbose_name="توضیحات سفارش(اختیاری)")
-    total_amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="مبلغ کل")
     auth_code = models.IntegerField(verbose_name="کد احرازهویت")
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    created_at_shamsi = models.CharField(max_length=10, null=True, blank=True, verbose_name="تاریخ ثبت سفارش")
+    created_at_time = models.CharField(max_length=8, null=True, blank=True, verbose_name="زمان ثبت سفارش")
 
     class Meta:
-        verbose_name_Plural = "سفارشات"
+        verbose_name_plural = "سفارشات"
         verbose_name = "سفارش"
 
     def save(self, *args, **kwargs):
         if not self.id:
             self.created_at = timezone.now()
-            self.total_amount = 0
             self.auth_code = random.randint(1, 100)
+            jdt = jdatetime_datetime.now()
+            self.created_at_shamsi = jdt.strftime('%Y/%m/%d')
+            self.created_at_time = jdt.strftime('%H:%M:%S')
             return super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"از میز {self.table_number} {self.store} به قیمت {self.total_amount} تومان"
+        return f"میز {self.table_number} {self.store} {self.created_at_shamsi} - {self.created_at_time}"
 
 
 class OrderItem(models.Model):
@@ -36,18 +40,13 @@ class OrderItem(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     class Meta:
-        verbose_name_Plural = "آیتم های سفارش"
+        verbose_name_plural = "آیتم های سفارش"
         verbose_name = "آیتم سفارش"
 
     def save(self, *args, **kwargs):
         if not self.id:
             self.created_at = timezone.now()
-            if self.order:
-                self.order.total_amount += (self.product.unit_price * self.quantity)
-                self.order.save()
-            return super().save(*args, **kwargs)
-        self.updated_at = timezone.now()
-        return super().save(*args, **kwargs)
+            super().save(*args, **kwargs)
 
-    def str(self):
+    def __str__(self):
         return f"{self.product}:{self.quantity}"
