@@ -1,6 +1,7 @@
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+import rest_framework.permissions
 
 load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,9 +38,8 @@ INSTALLED_APPS = [
     'owner',
     'rating',
     'order',
-    'collection',
+    'menu',
     'comment',
-    'product'
 ]
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'

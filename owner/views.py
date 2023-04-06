@@ -1,4 +1,5 @@
 # from requests import Response
+from rest_framework.permissions import IsAuthenticated
 from .models import BusinessOwner
 from .serializers import BusinessOwnerSerializer
 from rest_framework.viewsets import ModelViewSet
@@ -7,6 +8,7 @@ from rest_framework.viewsets import ModelViewSet
 class BusinessOwnerViewSet(ModelViewSet):
     queryset = BusinessOwner.objects.all()
     serializer_class = BusinessOwnerSerializer
+    permission_classes = [IsAuthenticated]
     search_fields = ('phone_number',)
     ordering_fields = '__all__'
 
