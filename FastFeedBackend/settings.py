@@ -26,6 +26,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'corsheaders',
+
     'admin_interface',
     'colorfield',
     'django.contrib.admin',
@@ -36,7 +38,6 @@ INSTALLED_APPS = [
     'subs',
     'store',
     'owner',
-    'rating',
     'order',
     'menu',
     'comment',
@@ -66,6 +67,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'FastFeedBackend.urls'
@@ -128,7 +130,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
+CORS_ORIGIN_ALLOW_ALL = True
 # sms.ir variables
 # SMSIR_API_KEY = ''
 # SMSIR_PHONE_NUMBER = ''

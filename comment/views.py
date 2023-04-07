@@ -1,9 +1,7 @@
 from rest_framework.permissions import IsAuthenticated
-from comment.serializers import CommentSerializer
 from rest_framework.viewsets import ModelViewSet
-from comment.models import Comment
-from rating.serializers import RatingSerializer
-from rating.models import Rating
+from .models import Comment,Rating
+from .serializers import RatingSerializer, CommentSerializer
 
 
 class CommentViewSet(ModelViewSet):

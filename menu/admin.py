@@ -1,3 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Collection,Product
+admin.site.register(Collection)
+admin.site.register(Product)

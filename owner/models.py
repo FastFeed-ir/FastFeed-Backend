@@ -20,8 +20,8 @@ class BusinessOwner(models.Model):
     updated_at = models.DateTimeField(editable=False, null=True, blank=True)
 
     class Meta:
-        verbose_name_plural = "مالکان فروشگاه"
-        verbose_name = "مالک فروشگاه"
+        verbose_name_plural = "صاحبان فروشگاه"
+        verbose_name = "صاحب فروشگاه"
 
     def __str__(self):
         if self.first_name:

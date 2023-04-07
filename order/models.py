@@ -3,7 +3,7 @@ import random
 from django.db import models
 from django.utils import timezone
 from jdatetime import datetime as jdatetime_datetime
-from product.models import Product
+from menu.models import Product
 from store.models import Store
 
 
