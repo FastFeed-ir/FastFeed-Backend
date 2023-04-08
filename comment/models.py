@@ -1,12 +1,13 @@
 from django.db import models
 from django.utils import timezone
 from menu.models import Product
+from order.models import Order
 
 
 class Comment(models.Model):
     name = models.CharField(max_length=32, default='ناشناس', verbose_name="نام")
     content = models.CharField(max_length=1024, verbose_name="متن نظر")
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='comments', verbose_name="محصول")
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='comments', verbose_name="محصول")
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     class Meta:
