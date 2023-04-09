@@ -37,6 +37,6 @@ GENDER_CHOICES = (
     (3, 'سایر')
 )
 BUSINESS_TYPE_CHOICES = [
-    (1, 'Cafe'),
-    (2, 'Restaurant'),
+    (1, 'کافه'),
+    (2, 'رستوران'),
 ]

@@ -7,7 +7,7 @@ from order.models import Order
 class Comment(models.Model):
     name = models.CharField(max_length=32, default='ناشناس', verbose_name="نام")
     content = models.CharField(max_length=1024, verbose_name="متن نظر")
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='comments', verbose_name="محصول")
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='comments', verbose_name="سفارش")
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     class Meta:
@@ -21,7 +21,7 @@ class Comment(models.Model):
             return super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.product} from {self.name} : {self.amount}"
+        return f"{self.order}:{self.name}"
 
 
 
