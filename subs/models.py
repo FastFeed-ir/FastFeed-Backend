@@ -2,6 +2,7 @@ import jdatetime
 from django.db import models
 from django.utils import timezone
 from store import models as store
+from owner.models import BusinessOwner
 
 
 class Subscription(models.Model):
@@ -13,7 +14,8 @@ class Subscription(models.Model):
 
     start_date = models.CharField(null=True, blank=True, verbose_name="تاریخ شروع اشتراک(به صورت خودکار افزوده میشود)",
                                   max_length=10)
-
+    business_owner = models.ForeignKey(BusinessOwner, on_delete=models.CASCADE,blank=True, null=True,
+                                       verbose_name="مالک فروشگاه(به صورت خودکار افزوده میشود)")
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(editable=False, null=True, blank=True)
 
@@ -27,6 +29,7 @@ class Subscription(models.Model):
             shamsi_date = jdatetime.date.fromgregorian(date=self.created_at.date())
             self.start_date = shamsi_date.strftime('%Y/%m/%d')
             self.url = f"http://FastFeed.ir/{self.store.business_type}/{self.store.id}/"
+            self.business_owner = self.store.business_owner
         else:
             self.updated_at = timezone.now()
         super().save(*args, **kwargs)
