@@ -16,9 +16,9 @@ class Store(models.Model):
 
     city = models.CharField(max_length=32, null=True, blank=True, verbose_name="شهر(اختیاری)")
     address = models.CharField(max_length=1024, null=True, blank=True, verbose_name="آدرس(اختیاری)")
-    instagram_page_link = models.CharField(max_length=32, null=True, blank=True,
+    instagram_page_link = models.CharField(max_length=64, null=True, blank=True,
                                            verbose_name="آدرس پیج اینستاگرام(اختیاری)")
-    telegram_channel_link = models.CharField(max_length=32, null=True, blank=True,
+    telegram_channel_link = models.CharField(max_length=64, null=True, blank=True,
                                              verbose_name="آدرس کانال تلگرام(اختیاری)")
     subscription_factor = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True,
                                               verbose_name="ضریب اشتراک(به صورت خودکار افزوده میشود)")

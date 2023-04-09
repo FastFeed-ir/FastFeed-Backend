@@ -54,12 +54,22 @@ ________________________________________________________________________________
 **APIs**:<br>
 Store API:<br>
 
-### Notes: <br>
+### the arguments needed: <br>
 
-business_type is an integer which 1 : cafe and 2 : resturant<br>
-business_owner is an integer and it is business_owner's id<br>
-state is an integer and it is choosen from state list in [constants.py](./utilities/constants.py )<br>
-city, address, instagram_page_link, telegram_channel_link are optional<br>
+title: string(char field 32): required
+business_owner: int: required:
+    1=> cafe
+    2=> restaurant
+business_type: int: required
+state: int: required:
+    chosen from [constants.py](./utilities/constants.py )
+city: string(char field 32): optional
+address: string(char field 1024): optional
+telephone_number: string(char field 32): required
+tables_count: int: required
+instagram_page_link: string(char field 64): optional
+telegram_channel_link: string(char field 64): optional
+
 **if 201 in Response body server send you store which created(with id and other only read fields)**
 
 ## Store API:
@@ -92,27 +102,23 @@ Status codes:```201``` ```400```
 ### PUT method
 
 specified URL:
-http://localhost:8000/stores/<ID>/
+```<baseURL>/stores/```
 Data example:
-{
-"id": 1,
-"title": "Energy Recovery, Inc.",
-"logo": "profile_pictures/my_profile_picture.jpg",
-"business_type": "Restaurant",
-"business_owner": 1,
-"state": "Žďár",
-"city": "Žďár",
-"address": "788 Oak Road",
-"telephone_number": "384-776-0164",
-"tables_count": 1,
-"subscription_factor": 67.16,
-"
-instagram_page_link": "https://businesswire.com/eget/congue/eget/semper/rutrum/nulla/nunc.xml?eget=in&rutrum=magna&at=bibendum&lorem=imperdiet&integer=nullam&tincidunt=orci&ante=pede&vel=venenatis&ipsum=non",
-"
-telegram_channel_link": "http://kickstarter.com/orci/luctus/et/ultrices.aspx?velit=lacus&vivamus=purus&vel=aliquet&nulla=at&eget=feugiat&eros=non&elementum=pretium&pellentesque=quis&quisque=lectus&porta=suspendisse&volutpat=potenti&erat=in&quisque=eleifend&erat=quam&eros=a&viverra=odio&eget=in&congue=hac&eget=habitasse&semper=platea&rutrum=dictumst&nulla=maecenas&nunc=ut&purus=massa&phasellus=quis&in=augue&felis=luctus&donec=tincidunt&semper=nulla&sapien=mollis&a=molestie",
-"created_at": 2021-08-14 14:25:00
-"updated_at": 2021-08-14 14:25:00
-}
+```
+    {
+        "title": "کبابی عمو حسن",
+        "business_type": 2,
+        "business_owner": 1,
+        "telephone_number": "031311122233",
+        "tables_count": 5,
+        "state":4,
+        "logo": "null",
+        "city": "کاشان",
+        "address": "نبش خیابان مدرس",
+        "instagram_page_link": "@test",
+        "telegram_channel_link": "@test"
+    }
+```
 Status codes:
 202
 400
@@ -121,18 +127,23 @@ Status codes:
 ### PATCH method
 
 specified URL:
-http://localhost:8000/stores/<ID>/
+```<baseURL>/stores/```
 Data example:
-{
-"title": "Energy Recovery, Inc.",
-"logo": "profile_pictures/my_profile_picture.jpg",
-"business_type": "Restaurant",
-"business_owner": 1,
-"state": "Žďár",
-"city": "Žďár",
-"address": "788 Oak Road",
-"updated_at": 2021-08-14 14:25:00
-}
+```
+    {
+        "title": "کبابی عمو حسن",
+        "business_type": 2,
+        "business_owner": 1,
+        "telephone_number": "031311122233",
+        "tables_count": 5,
+        "state":4,
+        "logo": "null",
+        "city": "کاشان",
+        "address": "نبش خیابان مدرس",
+        "instagram_page_link": "@test",
+        "telegram_channel_link": "@test"
+    }
+```
 Status codes:
 202
 400
@@ -141,8 +152,8 @@ Status codes:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 GET method:
 specified URL:
-http://localhost:8000/stores/
-http://localhost:8000/stores/<ID>/
+```<baseURL>/stores/```
+```<baseURL>/stores/<ID>/```
 Status codes:
 200
 404
@@ -150,31 +161,37 @@ Status codes:
 
 DELETE method
 specified URL:
-http://localhost:8000/stores/<ID>/
+```<baseURL>/stores/<ID>/```
 Status codes:
 204
 404
 ______________________________________________________________________________________________________________
-2.menu app:
-APIs:
-Collection API
-Product API
-        
+## menu app:<br>
+
+**APIs**:<br>
+Collection API:<br>
+Product API:<br>
 ========================================================================
-Collection API
+## Collection API
+
+### the arguments needed: <br>
+store: int: required
+title: string(char field 32): required
+is_featured: bool: optional
+
+
 
 POST method:
 specified URL:
-http://localhost:8000/collections/
+```<baseURL>/collections/```
 Data example:
-{
-"id": 1,
-"title": "cakes",
-"store": "Nuveen Core Equity Alpha Fund",
-"is_featured": false,
-"created_at": 2021-08-14 14:25:00,
-"updated_at": 2021-08-14 14:25:00
-}
+```
+    {
+        "title": "cakes",
+        "store": "Nuveen Core Equity Alpha Fund",
+        "is_featured": false
+    }
+```
 Status codes:
 201
 400
@@ -182,16 +199,16 @@ Status codes:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 PUT method:
 specified URL:
-http://localhost:8000/collections/<ID>/
+```<baseURL>/collections/<ID>/```
+
 Data example:
+```
     {
-        "id": 1,
         "title": "cakes",
         "store": "Nuveen Core Equity Alpha Fund",
-        "is_featured": false,
-        "created_at": 2021-08-14 14:25:00,
-        "updated_at": 2021-08-14 14:25:00
-}
+        "is_featured": false
+    }
+```
 Status codes:
 202
 400
@@ -200,12 +217,14 @@ Status codes:
 
 PATCH method:
 specified URL:
-http://localhost:8000/collections/<ID>/
+```<baseURL>/collections/<ID>/```
+
 Data example:
-{
-"title": "cakes",
-"updated_at": 2021-08-14 14:25:00
-}
+```
+    {
+        "is_featured": false
+    }
+```
 Status codes:
 202
 400
@@ -214,8 +233,8 @@ Status codes:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 GET method:
 specified URL:
-http://localhost:8000/collections/
-http://localhost:8000/collections/<ID>/
+```<baseURL>/collections/```
+```<baseURL>/collections/<ID>/```
 Status codes:
 200
 404
@@ -223,35 +242,42 @@ Status codes:
 
 DELETE method:
 specified URL:
-http://localhost:8000/collections/<ID>/
+```<baseURL>/collections/<ID>/```
 Status codes:
 204
 404
 ========================================================================
-
 ## Product API
+
+### the arguments needed: <br>
+
+title: string(char field 32): required
+unit_price: decimal: required
+collection: int: required
+is_available: bool: required
+is_featured: bool: optional
+description: string(char field 1024): optional
+inventory: positive small int: optional
+discount_percentage: int: optional
 
 POST method:
 specified URL:
-http://localhost:8000/products/
+```<baseURL>/products/```
 Data example:
-{
-"id": 1,
-"title": "chocolate cake",
-"image": "images/ndfbgs.jpg",
-"description": "Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci
-luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a,
-feugiat et, eros.",
-"unit_price": 41,
-"inventory": 53,
-"is_available": true,
-"is_featured": false,
-"discount_percentage": 27,
-"store": "Brookfield Infrastructure Partners LP",
-"collection": "cakes",
-"created_at": 2021-08-14 14:25:00,
-"updated_at": 2021-08-14 14:25:00
-}
+```
+    {
+        "title": "chocolate cake",
+        "description": "Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci
+        luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a,
+        feugiat et, eros.",
+        "unit_price": 41,
+        "inventory": 53,
+        "is_available": true,
+        "is_featured": false,
+        "discount_percentage": 27,
+        "collection": "cakes"
+    }
+```
 Status codes:
 201
 400
@@ -259,23 +285,22 @@ Status codes:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 PUT method
 specified URL:
-http://localhost:8000/products/<ID>/
+```<baseURL>/products/<ID>/```
 Data example:
+```
     {
-        "id": 1,
         "title": "chocolate cake",
-        "image": "images/ndfbgs.jpg",
-        "description": "Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.",
+        "description": "Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci
+        luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a,
+        feugiat et, eros.",
         "unit_price": 41,
         "inventory": 53,
         "is_available": true,
         "is_featured": false,
         "discount_percentage": 27,
-        "store": "Brookfield Infrastructure Partners LP",
-        "collection": "cakes",
-        "created_at": 2021-08-14 14:25:00,
-        "updated_at": 2021-08-14 14:25:00
+        "collection": "cakes"
     }
+```
 Status codes:
 202
 400
@@ -284,17 +309,15 @@ Status codes:
 
 PATCH method
 specified URL:
-http://localhost:8000/products/<ID>/
+```<baseURL>/products/<ID>/```
 Data example:
-{
-"title": "chocolate cake",
-"image": "images/ndfbgs.jpg",
-"description": "Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci
-luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a,
-feugiat et, eros.",
-"unit_price": 41,
-"updated_at": 2021-08-14 14:25:00
-}
+```
+    {
+        "is_available": true,
+        "is_featured": false,
+        "discount_percentage": 27
+    }
+```
 Status codes:
 202
 400
@@ -312,32 +335,37 @@ Status codes:
 
 DELETE method
 specified URL:
-http://localhost:8000/products/<ID>/
+```<baseURL>/products/<ID>/```
 Status codes:
 204
 404
 ______________________________________________________________________________________________________________
-3.comment app:
-APIs:
-Comment API
-Rating API
+## comment app:<br>
+
+**APIs**:<br>
+Comment API:<br>
+Rating API:<br>
 ========================================================================
-Comment API
+## Comment API
+
+### the arguments needed: <br>
+
+name: string(char field 32): required
+content: string(char field 1024): required
 
 POST method:
 specified URL:
-http://localhost:8000/comments/
+```<baseURL>/comments/```
 Data example:
-{
-"id": 1,
-"name": "Ardis Hamman",
-"content": "Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras
-pellentesque volutpat dui.\n\nMaecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus
-sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra
-diam vitae quam. Suspendisse potenti.",
-"order": 1,
-"created_at": 2021-08-14 14:25:00
-}
+```
+    {
+        "name": "Ardis Hamman",
+        "content": "Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras
+        pellentesque volutpat dui.\n\nMaecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus
+        sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra
+        diam vitae quam. Suspendisse potenti."
+    }
+```
 Status codes:
 201
 400
@@ -345,8 +373,8 @@ Status codes:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 GET method:
 specified URL:
-http://localhost:8000/comments/
-http://localhost:8000/comments/<ID>/
+```<baseURL>/comments/```
+```<baseURL>/comments/<ID>/```
 Status codes:
 200
 404
@@ -354,7 +382,7 @@ Status codes:
 
 DELETE method:
 specified URL:
-http://localhost:8000/comments/<ID>/
+```<baseURL>/comments/<ID>/```
 Status codes:
 204
 404
