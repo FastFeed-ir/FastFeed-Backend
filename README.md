@@ -1,49 +1,51 @@
-```
+
 This file contains:
 
-1.All apps and their APIs in this project
-2.All HTTP methods used in this project and their work
+1.All apps and their APIs in this project<br>
+2.All HTTP methods used in this project and their work<br>
 3.Description of each API in each app in detail
 
 ______________________________________________________________________________________________________________
-### 1.All apps:
+# All apps:
 
-1.store app including Store API : For handling the stores
-2.menu app including:
-    -Collection API: For handling the collections of all stores and the collections of a specified store
-    -Product API: For handling the products of all stores and collections, 
-    and the products of a specified store or collection
-3.comment app including:
-    -Comment API: For handling the comments of all orders and the comments of a specified order
-    -Rating API: For handling the ratings of all products and the rating of a specified product
-4.subs app including Subscription API: For handling the subscriptions of all stores and the subscription of a specified store
-5.owner app including BusinessOwner API: For handling the business owners(store owners)
-6.order app including:
-    -Order API: For handling the orders of all stores and the orders of a specified store
-    -OrderItem API: For handling the order items of all orders and the order items of a specified order
+## store app
+    Store API : For handling the stores<br>
+## menu app 
+    Collection API: For handling the collections of all stores and the collections of a specified store<br>
+    Product API: For handling the products of all stores and collections,and the products of a specified store or collection<br>
+## comment app<br>
+    Comment API: For handling the comments of all orders and the comments of a specified order<br>
+    Rating API: For handling the ratings of all products and the rating of a specified product<br>
+## subs app 
+    Subscription API: For handling the subscriptions of all stores and the subscription of a specified store<br>
+## owner app 
+    BusinessOwner API: For handling the business owners(store owners)<br>
+## order app <br>
+    Order API: For handling the orders of all stores and the orders of a specified store<br>
+    OrderItem API: For handling the order items of all orders and the order items of a specified order<br>
 ______________________________________________________________________________________________________________
-### 2.All HTTP methods:
+# All HTTP methods:
 
-1.POST method : For creating a new object
-2.PUT method : For updating all fields of an existing object
-3.PATCH method : For updating a subset of an existing object's fields
-4.GET method : For retrieving an existing object
-5.DELETE method : For deleting an existing object
+1.**POST method** : For creating a new object<br>
+2.**PUT method** : For updating all fields of an existing object<br>
+3.**PATCH method** : For updating a subset of an existing object's fields<br>
+4.**GET method** : For retrieving an existing object<br>
+5.**DELETE method** : For deleting an existing object<br>
 ______________________________________________________________________________________________________________
-### 3.Description of each API in each app in detail:
+# Description of each API in each app in detail:
 
 
-1.store app:
+## store app:<br>
     APIs:
         Store API
-========================================================================
-Store API:
+## Store API:
 
-POST method:
+### POST method:<br>
 specified URL:
-http://localhost:8000/stores/
+```http://<host>:<port>/stores/```
 
-Data example:
+Data example:<br>
+    ```
     {
         "id": 1,
         "title": "Energy Recovery, Inc.",
@@ -56,17 +58,20 @@ Data example:
         "telephone_number": "384-776-0164",
         "tables_count": 1,
         "subscription_factor": 67.16,
-        "instagram_page_link": "https://businesswire.com/eget/congue/eget/semper/rutrum/nulla/nunc.xml?eget=in&rutrum=magna&at=bibendum&lorem=imperdiet&integer=nullam&tincidunt=orci&ante=pede&vel=venenatis&ipsum=non",
-        "telegram_channel_link": "http://kickstarter.com/orci/luctus/et/ultrices.aspx?velit=lacus&vivamus=purus&vel=aliquet&nulla=at&eget=feugiat&eros=non&elementum=pretium&pellentesque=quis&quisque=lectus&porta=suspendisse&volutpat=potenti&erat=in&quisque=eleifend&erat=quam&eros=a&viverra=odio&eget=in&congue=hac&eget=habitasse&semper=platea&rutrum=dictumst&nulla=maecenas&nunc=ut&purus=massa&phasellus=quis&in=augue&felis=luctus&donec=tincidunt&semper=nulla&sapien=mollis&a=molestie",
+        "instagram_page_link": "",
+        "telegram_channel_link": ""
         "created_at": 2021-08-14 14:25:00
         "updated_at": 2021-08-14 14:25:00
     }
+    ```
     
 Status codes:
+```
 201
 400
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-PUT method
+```
+
+### PUT method
 specified URL:
 http://localhost:8000/stores/<ID>/
 Data example:
@@ -91,8 +96,8 @@ Status codes:
 202
 400
 404
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-PATCH method
+
+### PATCH method
 specified URL:
 http://localhost:8000/stores/<ID>/
 Data example:
