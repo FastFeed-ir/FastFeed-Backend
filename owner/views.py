@@ -1,8 +1,9 @@
 # from requests import Response
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.viewsets import ModelViewSet
+
 from .models import BusinessOwner
 from .serializers import BusinessOwnerSerializer
-from rest_framework.viewsets import ModelViewSet
 
 
 class BusinessOwnerViewSet(ModelViewSet):

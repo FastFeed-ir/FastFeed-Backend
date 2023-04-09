@@ -1,14 +1,12 @@
+from comment import views as comment
 from django.contrib import admin
 from django.urls import path
-
-from rest_framework.routers import DefaultRouter
-from rest_framework.authtoken import views
-from store import views as store
 from menu import views as menu
-from comment import views as comment
-from subs import views as subscription
 from order import views as order
 from owner import views as owner
+from rest_framework.routers import DefaultRouter
+from store import views as store
+from subs import views as subscription
 
 router = DefaultRouter()
 router.register('stores', store.StoreViewSet)

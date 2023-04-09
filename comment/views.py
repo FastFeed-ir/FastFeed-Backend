@@ -1,5 +1,6 @@
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
+
 from .models import Comment, Rating
 from .serializers import RatingSerializer, CommentSerializer
 

@@ -1,7 +1,8 @@
-from pathlib import Path
 import os
-from dotenv import load_dotenv
+from pathlib import Path
+
 import rest_framework.permissions
+from dotenv import load_dotenv
 
 load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.

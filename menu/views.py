@@ -1,7 +1,8 @@
 from rest_framework.permissions import IsAuthenticated
-from .serializers import CollectionSerializer, ProductSerializer
 from rest_framework.viewsets import ModelViewSet
+
 from .models import Collection, Product
+from .serializers import CollectionSerializer, ProductSerializer
 
 
 class CollectionViewSet(ModelViewSet):

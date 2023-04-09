@@ -11,10 +11,12 @@ class Order(models.Model):
     store = models.ForeignKey(Store, on_delete=models.CASCADE, related_name='orders', verbose_name="فروشگاه")
     table_number = models.PositiveSmallIntegerField()
     description = models.TextField(max_length=255, null=True, blank=True, verbose_name="توضیحات سفارش(اختیاری)")
-    auth_code = models.IntegerField( null=True, blank=True,verbose_name="کد احرازهویت(به صورت خودکار افزوده میشود)")
+    created_at_shamsi = models.CharField(max_length=10, null=True, blank=True,
+                                         verbose_name="تاریخ ثبت سفارش(به صورت خودکار افزوده میشود)")
+    created_at_time = models.CharField(max_length=8, null=True, blank=True,
+                                       verbose_name="زمان ثبت سفارش(به صورت خودکار افزوده میشود)")
+    auth_code = models.IntegerField(null=True, blank=True, verbose_name="کد احرازهویت(به صورت خودکار افزوده میشود)")
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
-    created_at_shamsi = models.CharField(max_length=10, null=True, blank=True, verbose_name="تاریخ ثبت سفارش(به صورت خودکار افزوده میشود)")
-    created_at_time = models.CharField(max_length=8, null=True, blank=True, verbose_name="زمان ثبت سفارش(به صورت خودکار افزوده میشود)")
 
     class Meta:
         verbose_name_plural = "سفارشات"
@@ -34,9 +36,9 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items', verbose_name="سفارش")
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="محصول")
     quantity = models.PositiveSmallIntegerField(verbose_name="تعداد")
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items', verbose_name="سفارش")
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     class Meta:
