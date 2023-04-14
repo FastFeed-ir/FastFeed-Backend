@@ -10,7 +10,7 @@ from store.models import Store
 class Order(models.Model):
     store = models.ForeignKey(Store, on_delete=models.CASCADE, related_name='orders', verbose_name="فروشگاه")
     table_number = models.PositiveSmallIntegerField()
-    description = models.TextField(max_length=255, null=True, blank=True, verbose_name="توضیحات سفارش(اختیاری)")
+    description = models.TextField(max_length=1024, null=True, blank=True, verbose_name="توضیحات سفارش(اختیاری)")
     created_at_shamsi = models.CharField(max_length=10, null=True, blank=True,
                                          verbose_name="تاریخ ثبت سفارش(به صورت خودکار افزوده میشود)")
     created_at_time = models.CharField(max_length=8, null=True, blank=True,
