@@ -24,7 +24,7 @@ class Comment(models.Model):
 
 
 class Rating(models.Model):
-    score = models.IntegerField(choices=[(i, i) for i in range(1, 6)], default=1, verbose_name="امتیاز")
+    score = models.PositiveIntegerField(choices=[(i, i) for i in range(1, 6)], default=1, verbose_name="امتیاز")
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="محصول")
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 

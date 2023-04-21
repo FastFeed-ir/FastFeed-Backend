@@ -161,3 +161,12 @@ dmypy.json
 cython_debug/
 
 
+/.idea/ChatGPTCopilotChannelManager.xml
+/.idea/dataSources.xml
+/.idea/FastFeed-Backend.iml
+/.idea/git_toolbox_prj.xml
+/.idea/GitLink.xml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/vcs.xml

@@ -5,19 +5,19 @@ from utilities.constants import BUSINESS_TYPE_CHOICES, STATE_CHOICES
 
 
 class Store(models.Model):
-    title = models.CharField(max_length=32, verbose_name="نام")
+    title = models.CharField(max_length=31, verbose_name="نام")
     business_owner = models.ForeignKey(BusinessOwner, on_delete=models.CASCADE, related_name='stores',
                                        verbose_name="مالک فروشگاه")
     business_type = models.IntegerField(choices=BUSINESS_TYPE_CHOICES, verbose_name="نوع فروشگاه")
     owner_phone_number = models.CharField(max_length=20, unique=True, verbose_name="شماره تلفن مالک")
-    state = models.IntegerField(choices=STATE_CHOICES, verbose_name="استان")
+    state = models.PositiveIntegerField(choices=STATE_CHOICES, verbose_name="استان")
     telephone_number = models.CharField(max_length=20, verbose_name="شماره تلفن فروشگاه")
     tables_count = models.PositiveSmallIntegerField(verbose_name="تعداد میز")
     logo = models.ImageField(upload_to='logo_images/', blank=True, null=True, verbose_name="لوگو(اختیاری)")
 
-    city = models.CharField(max_length=32, null=True, blank=True, verbose_name="شهر(اختیاری)")
-    address = models.CharField(max_length=1024, null=True, blank=True, verbose_name="آدرس(اختیاری)")
-    instagram_page_link = models.CharField(max_length=64, null=True, blank=True,
+    city = models.CharField(max_length=31, null=True, blank=True, verbose_name="شهر(اختیاری)")
+    address = models.CharField(max_length=255, null=True, blank=True, verbose_name="آدرس(اختیاری)")
+    instagram_page_link = models.CharField(max_length=31, null=True, blank=True,
                                            verbose_name="آدرس پیج اینستاگرام(اختیاری)")
     subscription_factor = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True,
                                               verbose_name="ضریب اشتراک(به صورت خودکار افزوده میشود)")
