@@ -9,7 +9,7 @@ class Store(models.Model):
     business_owner = models.ForeignKey(BusinessOwner, on_delete=models.CASCADE, related_name='stores',
                                        verbose_name="مالک فروشگاه")
     business_type = models.IntegerField(choices=BUSINESS_TYPE_CHOICES, verbose_name="نوع فروشگاه")
-    owner_phone_number = models.CharField(max_length=20, unique=True, verbose_name="شماره تلفن مالک")
+    owner_phone_number = models.CharField(max_length=20, verbose_name="شماره تلفن مالک")
     state = models.PositiveIntegerField(choices=STATE_CHOICES, verbose_name="استان")
     telephone_number = models.CharField(max_length=20, verbose_name="شماره تلفن فروشگاه")
     tables_count = models.PositiveSmallIntegerField(verbose_name="تعداد میز")
