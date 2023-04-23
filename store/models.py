@@ -19,7 +19,7 @@ class Store(models.Model):
     address = models.CharField(max_length=255, null=True, blank=True, verbose_name="آدرس(اختیاری)")
     instagram_page_link = models.CharField(max_length=31, null=True, blank=True,
                                            verbose_name="آدرس پیج اینستاگرام(اختیاری)")
-    subscription_factor = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True,
+    subscription_factor = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True, editable=False,
                                               verbose_name="ضریب اشتراک(به صورت خودکار افزوده میشود)")
 
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)

@@ -3,11 +3,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework.authtoken import views
-from rest_framework.routers import DefaultRouter
 from menu import views as menu
 from order import views as order
 from owner import views as owner
+from rest_framework.authtoken import views
 from rest_framework.routers import DefaultRouter
 from store import views as store
 from subs import views as subscription

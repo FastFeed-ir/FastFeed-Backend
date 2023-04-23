@@ -1,8 +1,8 @@
 import jdatetime
 from django.db import models
 from django.utils import timezone
-from store import models as store
 from owner.models import BusinessOwner
+from store import models as store
 
 
 class Subscription(models.Model):
@@ -14,7 +14,7 @@ class Subscription(models.Model):
 
     start_date = models.CharField(null=True, blank=True, verbose_name="تاریخ شروع اشتراک(به صورت خودکار افزوده میشود)",
                                   max_length=10)
-    business_owner = models.ForeignKey(BusinessOwner, on_delete=models.CASCADE,blank=True, null=True,
+    business_owner = models.ForeignKey(BusinessOwner, on_delete=models.CASCADE, blank=True, null=True, editable=False,
                                        verbose_name="مالک فروشگاه(به صورت خودکار افزوده میشود)")
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(editable=False, null=True, blank=True)

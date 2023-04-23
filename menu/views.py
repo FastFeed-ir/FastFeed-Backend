@@ -1,6 +1,6 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
-from django_filters.rest_framework import DjangoFilterBackend
 
 from .models import Collection, Product
 from .serializers import CollectionSerializer, ProductSerializer
