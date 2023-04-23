@@ -8,8 +8,8 @@ from store.models import Store
 class Comment(models.Model):
     name = models.CharField(max_length=32, default='ناشناس', verbose_name="نام مشتری")
     content = models.CharField(max_length=1024, verbose_name="متن نظر")
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='comments', verbose_name="سفارش")
-    store = models.ForeignKey(Store, on_delete=models.CASCADE, related_name='collections', verbose_name="فروشگاه")
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='commentsorder', verbose_name="سفارش")
+    store = models.ForeignKey(Store, on_delete=models.CASCADE, related_name='collectionsstore', verbose_name="فروشگاه")
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     class Meta:
@@ -27,7 +27,7 @@ class Comment(models.Model):
 
 class Rating(models.Model):
     score = models.PositiveIntegerField(choices=[(i, i) for i in range(1, 6)], default=1, verbose_name="امتیاز")
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="محصول")
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="محصول",related_name="product")
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     class Meta:
