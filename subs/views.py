@@ -1,5 +1,6 @@
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
+from django_filters.rest_framework import DjangoFilterBackend
 
 from .models import Subscription
 from .serializers import SubscriptionSerializer
@@ -8,6 +9,7 @@ from .serializers import SubscriptionSerializer
 class SubscriptionViewSet(ModelViewSet):
     queryset = Subscription.objects.all()
     serializer_class = SubscriptionSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['store_id']
     permission_classes = [IsAuthenticated]
-    search_fields = ('store')
     ordering_fields = '__all__'
