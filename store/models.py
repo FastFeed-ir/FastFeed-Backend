@@ -9,17 +9,17 @@ class Store(models.Model):
     business_owner = models.ForeignKey(BusinessOwner, on_delete=models.CASCADE, related_name='stores',
                                        verbose_name="مالک فروشگاه")
     business_type = models.IntegerField(choices=BUSINESS_TYPE_CHOICES, verbose_name="نوع فروشگاه")
-    owner_phone_number = models.CharField(max_length=20, verbose_name="شماره تلفن مالک")
+    owner_phone_number = models.CharField(max_length=15, blank=True, verbose_name="شماره تلفن مالک")
     state = models.PositiveIntegerField(choices=STATE_CHOICES, verbose_name="استان")
-    telephone_number = models.CharField(max_length=20, verbose_name="شماره تلفن فروشگاه")
+    telephone_number = models.CharField(max_length=15, verbose_name="شماره تلفن فروشگاه")
     tables_count = models.PositiveSmallIntegerField(verbose_name="تعداد میز")
-    logo = models.ImageField(upload_to='logo_images/', blank=True, null=True, verbose_name="لوگو(اختیاری)")
+    logo = models.TextField(blank=True, verbose_name="لوگو(اختیاری)")
 
-    city = models.CharField(max_length=31, null=True, blank=True, verbose_name="شهر(اختیاری)")
-    address = models.CharField(max_length=255, null=True, blank=True, verbose_name="آدرس(اختیاری)")
-    instagram_page_link = models.CharField(max_length=31, null=True, blank=True,
+    city = models.CharField(max_length=31, blank=True, verbose_name="شهر(اختیاری)")
+    address = models.CharField(max_length=255, blank=True, verbose_name="آدرس(اختیاری)")
+    instagram_page_link = models.CharField(max_length=31, blank=True,
                                            verbose_name="آدرس پیج اینستاگرام(اختیاری)")
-    subscription_factor = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True, editable=False,
+    subscription_factor = models.DecimalField(max_digits=5, decimal_places=2, blank=True, editable=False,
                                               verbose_name="ضریب اشتراک(به صورت خودکار افزوده میشود)")
 
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
