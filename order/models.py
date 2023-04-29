@@ -10,12 +10,12 @@ from store.models import Store
 class Order(models.Model):
     store = models.ForeignKey(Store, on_delete=models.CASCADE, related_name='orders', verbose_name="فروشگاه")
     table_number = models.PositiveSmallIntegerField(verbose_name="تعداد میز")
-    description = models.TextField(max_length=255, null=True, blank=True, verbose_name="توضیحات سفارش(اختیاری)")
-    created_at_shamsi = models.CharField(max_length=10, null=True, blank=True,
+    description = models.CharField(max_length=255,  blank=True, verbose_name="توضیحات سفارش(اختیاری)")
+    created_at_shamsi = models.CharField(max_length=10,  blank=True,
                                          verbose_name="تاریخ ثبت سفارش(به صورت خودکار افزوده میشود)")
-    created_at_time = models.CharField(max_length=8, null=True, blank=True,
+    created_at_time = models.CharField(max_length=8, blank=True,
                                        verbose_name="زمان ثبت سفارش(به صورت خودکار افزوده میشود)")
-    auth_code = models.IntegerField(null=True, blank=True, verbose_name="کد احرازهویت(به صورت خودکار افزوده میشود)")
+    auth_code = models.IntegerField(null=True,  verbose_name="کد احرازهویت(به صورت خودکار افزوده میشود)")
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     class Meta:

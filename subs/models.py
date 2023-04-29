@@ -9,16 +9,15 @@ class Subscription(models.Model):
     store = models.ForeignKey(store.Store, on_delete=models.CASCADE, verbose_name="فروشگاه")
     period = models.PositiveIntegerField(verbose_name="دوره زمانی(به روز)")
     amount = models.DecimalField(max_digits=15, decimal_places=3, verbose_name="قیمت کل(به تومان)")
-    url = models.CharField(null=True, blank=True, max_length=63,
+    url = models.CharField( blank=True, max_length=63,
                            verbose_name="آدرس اینترنتی فروشگاه در فست فید(به صورت خودکار افزوده میشود)")
 
-    start_date = models.CharField(null=True, blank=True, verbose_name="تاریخ شروع اشتراک(به صورت خودکار افزوده میشود)",
+    start_date = models.CharField( blank=True, verbose_name="تاریخ شروع اشتراک(به صورت خودکار افزوده میشود)",
                                   max_length=10)
     business_owner = models.ForeignKey(BusinessOwner, on_delete=models.CASCADE, blank=True, null=True, editable=False,
                                        verbose_name="مالک فروشگاه(به صورت خودکار افزوده میشود)")
-    created_at = models.DateTimeField(auto_now_add=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated_at = models.DateTimeField(editable=False, null=True, blank=True)
-
     class Meta:
         verbose_name_plural = "اشتراک ها"
         verbose_name = "اشتراک"

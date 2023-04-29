@@ -9,9 +9,9 @@ from django.utils import timezone
 
 
 class BusinessOwner(models.Model):
-    phone_number = models.CharField(max_length=20, unique=True, verbose_name="شماره تلفن")
-    first_name = models.CharField(max_length=31, blank=True, null=True, verbose_name="نام(اختیاری)")
-    last_name = models.CharField(max_length=31, blank=True, null=True, verbose_name="نام خانوادگی(اختیاری)")
+    phone_number = models.CharField(max_length=15, unique=True, verbose_name="شماره تلفن")
+    first_name = models.CharField(max_length=31, blank=True,  verbose_name="نام(اختیاری)")
+    last_name = models.CharField(max_length=31, blank=True,  verbose_name="نام خانوادگی(اختیاری)")
     # username = models.CharField(max_length=50, unique=True)
     # password = models.CharField(max_length=50)
     # verification_code = models.CharField(max_length=6, null=True, blank=True)

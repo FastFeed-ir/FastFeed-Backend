@@ -6,8 +6,8 @@ from store.models import Store
 
 
 class Comment(models.Model):
-    name = models.CharField(max_length=32, default='ناشناس', verbose_name="نام مشتری")
-    content = models.CharField(max_length=1024, verbose_name="متن نظر")
+    name = models.CharField(max_length=31, default='ناشناس', verbose_name="نام مشتری")
+    content = models.CharField(max_length=1023, verbose_name="متن نظر")
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='commentsorder', verbose_name="سفارش")
     store = models.ForeignKey(Store, editable=False, on_delete=models.CASCADE, related_name='collectionsstore',
                               verbose_name="فروشگاه(به طور خودکار اضافه میشود)")
