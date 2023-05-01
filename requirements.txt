@@ -1,0 +1,7 @@
+Django==3.2.13
+django_filter==2.4.0
+djangorestframework==3.14.0
+Flask==2.2.2
+Flask_SocketIO==5.3.3
+jdatetime==4.1.0
+python-dotenv==1.0.0
