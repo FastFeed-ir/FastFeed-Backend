@@ -1,5 +1,4 @@
 import random
-
 from django.db import models
 from django.utils import timezone
 from jdatetime import datetime as jdatetime_datetime
