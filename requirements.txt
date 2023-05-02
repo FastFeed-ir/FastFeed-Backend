@@ -5,3 +5,4 @@ Flask==2.2.2
 Flask_SocketIO==5.3.3
 jdatetime==4.1.0
 python-dotenv==1.0.0
+django-admin-interface==0.25.0
