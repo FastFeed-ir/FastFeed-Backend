@@ -8,7 +8,7 @@ from store.models import Store
 
 class Order(models.Model):
     store = models.ForeignKey(Store, on_delete=models.CASCADE, related_name='orders', verbose_name="فروشگاه")
-    table_number = models.PositiveSmallIntegerField(verbose_name="تعداد میز")
+    table_number = models.PositiveSmallIntegerField(verbose_name="میز")
     description = models.CharField(max_length=255,  blank=True, verbose_name="توضیحات سفارش(اختیاری)")
     created_at_shamsi = models.CharField(max_length=10,  blank=True,
                                          verbose_name="تاریخ ثبت سفارش(به صورت خودکار افزوده میشود)")
