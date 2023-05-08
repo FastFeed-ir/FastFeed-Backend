@@ -17,6 +17,7 @@ class OrderViewSet(ModelViewSet):
 
 
 class LastOrderView(APIView):
+    permission_classes = [IsAuthenticated]
     def get(self, request, store_id, table_number):
         orders = Order.objects.filter(store_id=store_id, table_number=table_number).order_by('-created_at')
         if orders:
