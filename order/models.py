@@ -24,7 +24,7 @@ class Order(models.Model):
     def save(self, *args, **kwargs):
         if not self.id:
             self.created_at = timezone.now()
-            self.auth_code = random.randint(1, 100)
+            self.auth_code = random.randint(100, 999)
             jdt = jdatetime_datetime.now()
             self.created_at_shamsi = jdt.strftime('%Y/%m/%d')
             self.created_at_time = jdt.strftime('%H:%M:%S')
