@@ -1,13 +1,14 @@
-from comment import views as comment
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework.authtoken import views
+from rest_framework.routers import DefaultRouter
+
+from comment import views as comment
 from menu import views as menu
 from order import views as order
 from owner import views as owner
-from rest_framework.authtoken import views
-from rest_framework.routers import DefaultRouter
 from store import views as store
 from subs import views as subscription
 
@@ -26,4 +27,5 @@ urlpatterns = [
                   path('admin/', admin.site.urls),
                   path('api-token-auth/', views.obtain_auth_token),
                   path('api-auth/', include('rest_framework.urls')),
+                  path('stores/<int:store_id>/tables/<int:table_number>/last-order/', order.LastOrderView.as_view()),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + router.urls
