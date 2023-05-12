@@ -28,4 +28,4 @@ urlpatterns = [
                   path('api-token-auth/', views.obtain_auth_token),
                   path('api-auth/', include('rest_framework.urls')),
                   path('stores/<int:store_id>/tables/<int:table_number>/last-order/', order.LastOrderView.as_view()),
-              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + router.urls
+              ] + router.urls
