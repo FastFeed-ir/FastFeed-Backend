@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'admin_interface',
     'colorfield',
     'django.contrib.admin',
+    'azbankgateways',
 
     'rest_framework',
     'rest_framework.authtoken',
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     'order',
     'menu',
     'comment',
+    'payments'
 ]
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
@@ -119,6 +121,35 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+AZ_IRANIAN_BANK_GATEWAYS = {
+   'GATEWAYS': {
+       'BMI': {
+           'MERCHANT_CODE': BMI_MERCHANT_CODE,
+           'TERMINAL_CODE': BMI_TERMINAL_CODE,
+           'SECRET_KEY': '<YOUR SECRET CODE>',
+       },
+       'SEP': {
+           'MERCHANT_CODE': SEP_MERCHANT_CODE,
+           'TERMINAL_CODE': SEP_TERMINAL_CODE,
+       },
+       'IDPAY': {
+           'MERCHANT_CODE': IDPAY_MERCHANT_CODE,
+           'METHOD': 'POST',  # GET or POST
+           'X_SANDBOX': 1,  # 0 disable, 1 active
+       }
+   },
+   'IS_SAMPLE_FORM_ENABLE': True, # optional, default is inactive
+   'DEFAULT': 'IDPAY',
+   'CURRENCY': 'IRR', # optional
+   'TRACKING_CODE_QUERY_PARAM': 'tc', # optional
+   'TRACKING_CODE_LENGTH': 16, # optional
+   'SETTING_VALUE_READER_CLASS': 'azbankgateways.readers.DefaultReader', # optional
+   'BANK_PRIORITIES': [
+       'BMI',
+       'SEP',
+   ], # optional
+}
 
 LANGUAGE_CODE = 'fa'
 
