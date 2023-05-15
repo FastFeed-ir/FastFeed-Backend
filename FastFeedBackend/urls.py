@@ -22,6 +22,7 @@ router.register('owners', owner.BusinessOwnerViewSet)
 router.register('orders', order.OrderViewSet)
 router.register('order_items', order.OrderItemViewSet)
 router.register('ratings', comment.RatingViewSet)
+router.register(r'order-comments', comment.OrderCommentViewSet, basename='order-comments')
 
 urlpatterns = [
                   path('admin/', admin.site.urls),
