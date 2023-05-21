@@ -34,7 +34,7 @@ class Product(models.Model):
     is_available = models.BooleanField(default=True, verbose_name="فعال بودن")
     image = models.TextField(blank=True, verbose_name="تصویر(اختیاری)")
     description = models.CharField(max_length=255, blank=True, verbose_name="توضیحات(اختیاری)")
-    inventory = models.PositiveSmallIntegerField(blank=True, verbose_name="تعداد موجود(اختیاری)")
+    inventory = models.PositiveSmallIntegerField(default=0,blank=True, verbose_name="تعداد موجود(اختیاری)")
     is_featured = models.BooleanField(default=False, null=True, verbose_name="پیشنهادی بودن(اختیاری)")
     discount_percentage = models.DecimalField( blank=True, max_digits=5, decimal_places=2, default=0.0,
                                               verbose_name="درصد تخفیف(اختیاری)")
