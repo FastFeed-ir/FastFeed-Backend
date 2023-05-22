@@ -1,7 +1,10 @@
+from django.db.models import Avg
+from django.http import Http404
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets, exceptions
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 
 from .models import Comment, Rating
@@ -41,6 +44,7 @@ class OrderCommentViewSet(viewsets.ReadOnlyModelViewSet):
         except Exception as e:
             return Response({'detail': 'An error occurred.'}, status=500)
 
+
 class RatingViewSet(ModelViewSet):
     queryset = Rating.objects.all()
     serializer_class = RatingSerializer
@@ -48,3 +52,19 @@ class RatingViewSet(ModelViewSet):
     filterset_fields = ['product_id']
     permission_classes = [IsAuthenticated]
     ordering_fields = '__all__'
+
+
+class ProductRatingAPIView(APIView):
+    def get(self, request, product_id):
+        try:
+            ratings = Rating.objects.filter(product_id=product_id)
+            rating_count = ratings.count()
+            average_rating = ratings.aggregate(Avg('score'))['score__avg']
+            average_rating = round(average_rating, 2) if average_rating else None
+            data = {
+                'average_rating': average_rating,
+                'rating_count': rating_count,
+            }
+            return Response(data)
+        except Rating.DoesNotExist:
+            raise Http404("No ratings found for this product.")

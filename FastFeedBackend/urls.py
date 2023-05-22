@@ -1,9 +1,10 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.authtoken import views
 from rest_framework.routers import DefaultRouter
-from django.conf import settings
-from django.conf.urls.static import static
+
 from comment import views as comment
 from menu import views as menu
 from order import views as order
@@ -27,10 +28,11 @@ urlpatterns = [
                   path('api-token-auth/', views.obtain_auth_token),
                   path('api-auth/', include('rest_framework.urls')),
                   path('stores/<int:store_id>/tables/<int:table_number>/last-order/', order.LastOrderView.as_view()),
+                  path('product/<int:product_id>/average-rating/', comment.ProductRatingAPIView.as_view(),
+                       name='product-average-rating'),
                   path('orders/<int:order_id>/productsID/', order.OrderProductIdListAPIView.as_view(),
                        name='order-product_id-list'),
-                  path('orders/<int:order_id>/productsName/', order.OrderProductNameListAPIView.as_view(),
-                       name='order-product_name-list'),
+                  path('product/<int:product_id>/rating/',comment.ProductRatingAPIView.as_view(), name='product-rating'),
                   path('order-comments/', comment.OrderCommentViewSet.as_view({'get': 'list'}),
                        name='order-comment-list'),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + router.urls
