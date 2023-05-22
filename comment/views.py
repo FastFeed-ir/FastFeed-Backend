@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 
+from menu.models import Product
 from .models import Comment, Rating
 from .serializers import RatingSerializer, CommentSerializer, OrderCommentSerializer
 
@@ -55,9 +56,16 @@ class RatingViewSet(ModelViewSet):
 
 
 class ProductRatingAPIView(APIView):
-    def get(self, request, product_id):
+    def get_product(self, product_id):
         try:
-            ratings = Rating.objects.filter(product_id=product_id)
+            return Product.objects.get(id=product_id)
+        except Product.DoesNotExist:
+            raise Http404("Product not found.")
+
+    def get(self, request, product_id):
+        product = self.get_product(product_id)
+        try:
+            ratings = Rating.objects.filter(product=product)
             rating_count = ratings.count()
             average_rating = ratings.aggregate(Avg('score'))['score__avg']
             average_rating = round(average_rating, 2) if average_rating else None
