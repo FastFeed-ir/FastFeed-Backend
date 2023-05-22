@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils import timezone
+from jdatetime import datetime as jdatetime_datetime
+
 from menu.models import Product
 from order.models import Order
 from store.models import Store
@@ -11,7 +13,7 @@ class Comment(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='commentsorder', verbose_name="سفارش")
     store = models.ForeignKey(Store, editable=False, on_delete=models.CASCADE, related_name='collectionsstore',
                               verbose_name="فروشگاه(به طور خودکار اضافه میشود)")
-    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    created_at = models.CharField(max_length=31, null=True, blank=True, verbose_name="زمان ثبت")
 
     class Meta:
         verbose_name_plural = "نظرات"
@@ -19,9 +21,10 @@ class Comment(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.id:
-            self.created_at = timezone.now()
-            self.store = self.order.store
-            return super().save(*args, **kwargs)
+            now_local = timezone.now()
+            now_jdatetime = jdatetime_datetime.fromgregorian(datetime=now_local)
+            self.created_at = now_jdatetime.strftime('%Y/%m/%d %H:%M:%S')
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.order}:{self.name}"
@@ -30,7 +33,7 @@ class Comment(models.Model):
 class Rating(models.Model):
     score = models.PositiveIntegerField(choices=[(i, i) for i in range(1, 6)], default=1, verbose_name="امتیاز")
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="محصول", related_name="product")
-    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    created_at = models.CharField(max_length=31, null=True, blank=True, verbose_name="زمان ثبت")
 
     class Meta:
         verbose_name_plural = "امتیازات"
@@ -38,8 +41,10 @@ class Rating(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.id:
-            self.created_at = timezone.now()
-            return super().save(*args, **kwargs)
+            now_local = timezone.now()
+            now_jdatetime = jdatetime_datetime.fromgregorian(datetime=now_local)
+            self.created_at = now_jdatetime.strftime('%Y/%m/%d %H:%M:%S')
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f'{self.product} - {self.score} ستاره'

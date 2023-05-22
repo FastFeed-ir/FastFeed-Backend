@@ -1,10 +1,13 @@
 from django.test import TestCase
-from rest_framework.test import APIClient
+from django.urls import reverse
 from rest_framework import status
+from rest_framework.test import APIClient
+
+from store import models as store
 from .models import Order
 from .serializers import OrderSerializer
-from django.urls import reverse
-from store import models as store
+
+
 class OrderTestCase(TestCase):
     def setUp(self):
         self.client = APIClient()

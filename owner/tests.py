@@ -1,12 +1,12 @@
+from django.contrib.auth.models import User
 from django.test import TestCase
-from rest_framework.test import APIClient
-from rest_framework import status
-from owner.models import BusinessOwner
-from owner.serializers import BusinessOwnerSerializer
-from rest_framework.exceptions import ValidationError
 from django.urls import reverse
 from rest_framework.authtoken.models import Token
-from django.contrib.auth.models import User
+from rest_framework.exceptions import ValidationError
+from rest_framework.test import APIClient
+
+from owner.models import BusinessOwner
+from owner.serializers import BusinessOwnerSerializer
 
 
 class BusinessOwnerModelTest(TestCase):
@@ -73,4 +73,3 @@ class BusinessOwnerSerializerTest(TestCase):
             self.assertEqual(response.status_code, 200)
             self.assertEqual(len(response.data), 1)
             self.assertEqual(response.data[0]["phone_number"], "09123456789")
-

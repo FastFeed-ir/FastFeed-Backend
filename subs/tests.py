@@ -1,25 +1,24 @@
+from django.contrib.auth.models import User
 from django.test import TestCase
+from rest_framework.authtoken.models import Token
 from rest_framework.test import APIClient
-from rest_framework import status
+
 from owner.models import BusinessOwner
 from store.models import Store
 from subs.models import Subscription
 from subs.serializers import SubscriptionSerializer
-from subs.views import SubscriptionViewSet
-from rest_framework.exceptions import ValidationError
-from django.urls import reverse
-from rest_framework.authtoken.models import Token
-from django.contrib.auth.models import User
 
 
 class SubscriptionViewSetTestCase(TestCase):
     def setUp(self):
-        self.business_owner = BusinessOwner.objects.create(phone_number='09136534302', first_name='melika', last_name='khandan')
+        self.business_owner = BusinessOwner.objects.create(phone_number='09136534302', first_name='melika',
+                                                           last_name='khandan')
         self.user = User.objects.create_user(username='melika.khandan', password='testpass')
         self.token = Token.objects.create(user=self.user)  # Create token for the user
         self.client = APIClient()
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token.key)
-        self.store = Store.objects.create(title="My Store", business_owner=self.business_owner, business_type=1, state=1, tables_count=1)
+        self.store = Store.objects.create(title="My Store", business_owner=self.business_owner, business_type=1,
+                                          state=1, tables_count=1)
 
     def test_list_subscriptions(self):
         store = self.store
@@ -33,12 +32,14 @@ class SubscriptionViewSetTestCase(TestCase):
 
 class SubscriptionTestCase(TestCase):
     def setUp(self):
-        self.business_owner = BusinessOwner.objects.create(phone_number='09136534302', first_name='melika', last_name='khandan')
+        self.business_owner = BusinessOwner.objects.create(phone_number='09136534302', first_name='melika',
+                                                           last_name='khandan')
         self.client = APIClient()
         self.user = User.objects.create_user(username='testuser', password='testpass')
         self.token = Token.objects.create(user=self.user)  # Create token for the user
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token.key)
-        self.store = Store.objects.create(title="My Store", business_owner=self.business_owner, business_type=1, state=1, tables_count=1)
+        self.store = Store.objects.create(title="My Store", business_owner=self.business_owner, business_type=1,
+                                          state=1, tables_count=1)
 
     def test_create_subscription(self):
         data = {

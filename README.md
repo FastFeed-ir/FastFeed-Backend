@@ -52,13 +52,14 @@ OrderItem API: For handling the order items of all orders and the order items of
 # Description of every API in each app in detail:
 
 **Note: Images are not supported yet.**<br>
-**Note: If the response body contains the status code of ```201```, 
-it means that the server has sent you the respective object that was created, 
+**Note: If the response body contains the status code of ```201```,
+it means that the server has sent you the respective object that was created,
 including id and other read-only fields.**
 
 ## store app:
 
 **API(s)**:
+
 - Store API
 
 ---
@@ -66,6 +67,7 @@ including id and other read-only fields.**
 ### Store API:
 
 #### The arguments needed:
+
 - title: string (char field 32): required
 - business_type: int: required
     - 1 => cafe
@@ -87,6 +89,7 @@ specified URL(s):
 ```<baseURL>/stores/```
 
 Data example:
+
 ```
     {
         "title": "کبابی عمو حسن",
@@ -112,6 +115,7 @@ specified URL(s):
 ```<baseURL>/stores/```
 
 Data example:
+
 ```
     {
         "title": "کبابی عمو حسن",
@@ -138,6 +142,7 @@ specified URL(s):
 ```<baseURL>/stores/```
 
 Data example:
+
 ```
     {
         "title": "کبابی عمو حسن",
@@ -178,6 +183,7 @@ Status codes:
 ## menu app:
 
 **API(s)**:
+
 - Collection API
 - Product API
 
@@ -186,6 +192,7 @@ Status codes:
 ### Collection API:
 
 #### The arguments needed:
+
 - title: string(char field 32): required
 - is_featured: bool: optional
 
@@ -197,12 +204,14 @@ specified URL(s):
 ```<baseURL>/collections/```
 
 Data example:
+
 ```
     {
         "title": "cakes",
         "is_featured": false
     }
 ```
+
 Status codes:```201``` ```400```
 
 ###### PUT method:
@@ -211,6 +220,7 @@ specified URL(s):
 ```<baseURL>/collections/<ID>/```
 
 Data example:
+
 ```
     {
         "title": "cakes",
@@ -226,6 +236,7 @@ specified URL(s):
 ```<baseURL>/collections/<ID>/```
 
 Data example:
+
 ```
     {
         "is_featured": false
@@ -261,6 +272,7 @@ Status codes:
 ### Product API:
 
 #### The arguments needed:
+
 - title: string(char field 32): required
 - unit_price: decimal(max_digits=15, decimal_places=3): required
 - is_available: bool: required
@@ -277,6 +289,7 @@ specified URL(s):
 ```<baseURL>/products/```
 
 Data example:
+
 ```
     {
         "title": "chocolate cake",
@@ -299,6 +312,7 @@ specified URL:
 ```<baseURL>/products/<ID>/```
 
 Data example:
+
 ```
     {
         "title": "chocolate cake",
@@ -322,6 +336,7 @@ specified URL:
 ```<baseURL>/products/<ID>/```
 
 Data example:
+
 ```
     {
         "is_available": true,
@@ -359,6 +374,7 @@ Status codes:
 ## comment app:
 
 **API(s)**:
+
 - Comment API
 - Rating API
 
@@ -367,6 +383,7 @@ Status codes:
 ### Comment API:
 
 #### The arguments needed:
+
 - name: string(char field 32): required
 - content: string(char field 1024): required
 
@@ -378,6 +395,7 @@ specified URL:
 ```<baseURL>/comments/```
 
 Data example:
+
 ```
     {
         "name": "Ardis Hamman",
@@ -413,6 +431,7 @@ Status codes:
 ### Rating API:
 
 #### The arguments needed:
+
 - score: int (1-5): required
 
 #### HTTP methods:
@@ -423,6 +442,7 @@ specified URL:
 ```<baseURL>/ratings/```
 
 Data example:
+
 ```
     {
         "score": 5
@@ -457,6 +477,7 @@ Status codes:
 ## subs app:
 
 **API(s)**:
+
 - Subscription API
 
 ---
@@ -464,6 +485,7 @@ Status codes:
 ### Subscription API:
 
 #### The arguments needed:
+
 - period: positive int: required
 - amount: decimal(max_digits=20, decimal_places=3): optional
 
@@ -475,6 +497,7 @@ specified URL:
 ```<baseURL>/subscription/```
 
 Data example:
+
 ```
     {
         "period": 90,
@@ -492,6 +515,7 @@ specified URL:
 ```<baseURL>/subscription/<ID>/```
 
 Data example:
+
 ```
     {
         "period": 80,
@@ -509,6 +533,7 @@ specified URL:
 ```<baseURL>/subscription/<ID>/```
 
 Data example:
+
 ```
     {
         "amount": "2000.0"
@@ -544,6 +569,7 @@ Status codes:
 ## owner app:
 
 **API(s)**:
+
 - BusinessOwner API
 
 ---
@@ -551,6 +577,7 @@ Status codes:
 ### BusinessOwner API:
 
 #### The arguments needed:
+
 - first_name: string (char field 50): optional
 - last_name: string (char field 50): optional
 - phone_number: string (char field 20): required
@@ -563,6 +590,7 @@ specified URL:
 ```<baseURL>/owners/```
 
 Data example:
+
 ```
     {
         "first_name": "علی",
@@ -581,6 +609,7 @@ specified URL:
 ```<baseURL>/owners/<ID>/```
 
 Data example:
+
 ```
     {
         "first_name": "علی",
@@ -599,6 +628,7 @@ specified URL:
 ```<baseURL>/owners/<ID>/```
 
 Data example:
+
 ```
     {
         "phone_number": "09398506609"
@@ -633,6 +663,7 @@ Status codes:
 ## order app:
 
 **API(s)**:
+
 - Order API
 - OrderItem API
 
@@ -641,6 +672,7 @@ Status codes:
 ### Order API:
 
 #### The arguments needed:
+
 - table_number: positive int: required
 - description: string (char field 1024): optional
 
@@ -652,6 +684,7 @@ specified URL:
 ```<baseURL>/orders/```
 
 Data example:
+
 ```
     {
         "table_number": 6,
@@ -669,6 +702,7 @@ specified URL:
 ```<baseURL>/orders/<ID>/```
 
 Data example:
+
 ```
     {
         "table_number": 7,
@@ -686,6 +720,7 @@ specified URL:
 ```<baseURL>/owners/<ID>/```
 
 Data example:
+
 ```
     {
         "table_number": 5
@@ -720,6 +755,7 @@ Status codes:
 ### OrderItem API:
 
 #### The arguments needed:
+
 - quantity: positive small int: required
 
 #### HTTP methods:
@@ -730,6 +766,7 @@ specified URL:
 ```<baseURL>/order-items/```
 
 Data example:
+
 ```
     {
         "quantity": 2
@@ -764,7 +801,9 @@ Status codes:
 # SMS verification activation using Django:
 
 ## Steps:
+
 - Sign in to sms.ir
 - Install smsir in the project
-- Set SMSIR_API_KEY, SMSIR_PHONE_NUMBER, and SMSIR_API_URL values in the settings.py module, using your sms.ir account info
+- Set SMSIR_API_KEY, SMSIR_PHONE_NUMBER, and SMSIR_API_URL values in the settings.py module, using your sms.ir account
+  info
 

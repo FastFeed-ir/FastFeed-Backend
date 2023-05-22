@@ -1,6 +1,7 @@
-import jdatetime
 from django.db import models
 from django.utils import timezone
+from jdatetime import datetime as jdatetime_datetime
+
 from owner.models import BusinessOwner
 from store import models as store
 
@@ -9,28 +10,31 @@ class Subscription(models.Model):
     store = models.ForeignKey(store.Store, on_delete=models.CASCADE, verbose_name="فروشگاه")
     period = models.PositiveIntegerField(verbose_name="دوره زمانی(به روز)")
     amount = models.DecimalField(max_digits=15, decimal_places=3, verbose_name="قیمت کل(به تومان)")
-    url = models.CharField( blank=True, max_length=63,
+    url = models.CharField(blank=True, max_length=63,
                            verbose_name="آدرس اینترنتی فروشگاه در فست فید(به صورت خودکار افزوده میشود)")
 
-    start_date = models.CharField( blank=True, verbose_name="تاریخ شروع اشتراک(به صورت خودکار افزوده میشود)",
-                                  max_length=10)
     business_owner = models.ForeignKey(BusinessOwner, on_delete=models.CASCADE, blank=True, null=True, editable=False,
                                        verbose_name="مالک فروشگاه(به صورت خودکار افزوده میشود)")
-    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
-    updated_at = models.DateTimeField(editable=False, null=True, blank=True)
+    created_at = models.CharField(max_length=31, null=True, blank=True, verbose_name="زمان ثبت")
+    updated_at = models.CharField(max_length=31, null=True, blank=True, verbose_name="زمان بروزرسانی")
+
     class Meta:
         verbose_name_plural = "اشتراک ها"
         verbose_name = "اشتراک"
 
     def save(self, *args, **kwargs):
+
         if not self.id:
-            self.created_at = timezone.now()
-            shamsi_date = jdatetime.date.fromgregorian(date=self.created_at.date())
-            self.start_date = shamsi_date.strftime('%Y/%m/%d')
+            now_local = timezone.now()
+            now_jdatetime = jdatetime_datetime.fromgregorian(datetime=now_local)
+            self.created_at = now_jdatetime.strftime('%Y/%m/%d %H:%M:%S')
             self.url = f"http://FastFeed.ir/{self.store.business_type}/{self.store.id}/"
             self.business_owner = self.store.business_owner
         else:
-            self.updated_at = timezone.now()
+            now_local = timezone.now()
+            now_jdatetime = jdatetime_datetime.fromgregorian(datetime=now_local)
+            self.updated_at = now_jdatetime.strftime('%Y/%m/%d %H:%M:%S')
+
         super().save(*args, **kwargs)
 
     def __str__(self):

@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone
 
+from jdatetime import datetime as jdatetime_datetime
+
 
 # from django.contrib.auth.models import AbstractUser
 # import requests
@@ -10,14 +12,13 @@ from django.utils import timezone
 
 class BusinessOwner(models.Model):
     phone_number = models.CharField(max_length=15, unique=True, verbose_name="شماره تلفن")
-    first_name = models.CharField(max_length=31, blank=True,  verbose_name="نام(اختیاری)")
-    last_name = models.CharField(max_length=31, blank=True,  verbose_name="نام خانوادگی(اختیاری)")
+    first_name = models.CharField(max_length=31, blank=True, verbose_name="نام(اختیاری)")
+    last_name = models.CharField(max_length=31, blank=True, verbose_name="نام خانوادگی(اختیاری)")
     # username = models.CharField(max_length=50, unique=True)
     # password = models.CharField(max_length=50)
     # verification_code = models.CharField(max_length=6, null=True, blank=True)
 
-    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
-    updated_at = models.DateTimeField(editable=False, null=True, blank=True)
+    created_at = models.CharField(max_length=31, null=True, blank=True, verbose_name="زمان ثبت")
 
     class Meta:
         verbose_name_plural = "صاحبان فروشگاه"
@@ -31,13 +32,12 @@ class BusinessOwner(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.id:
-            self.created_at = timezone.now()
+            now_local = timezone.now()
+            now_jdatetime = jdatetime_datetime.fromgregorian(datetime=now_local)
+            self.created_at = now_jdatetime.strftime('%Y/%m/%d %H:%M:%S')
             # self.verification_code = self.generate_verification_code()
             # self.send_verification_sms
-        else:
-            self.updated_at = timezone.now()
-        return super().save(*args, **kwargs)
-
+        super().save(*args, **kwargs)
     # @staticmethod
     # def generate_verification_code():
     #     return str(random.randint(100000, 999999))

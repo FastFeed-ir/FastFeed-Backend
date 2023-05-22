@@ -34,7 +34,8 @@ urlpatterns = [
                        name='order-product_name-list'),
                   path('orders/<int:order_id>/productsID/', order.OrderProductIdListAPIView.as_view(),
                        name='order-product_id-list'),
-                  path('product/<int:product_id>/rating/',comment.ProductRatingAPIView.as_view(), name='product-rating'),
+                  path('product/<int:product_id>/rating/', comment.ProductRatingAPIView.as_view(),
+                       name='product-rating'),
                   path('order-comments/', comment.OrderCommentViewSet.as_view({'get': 'list'}),
                        name='order-comment-list'),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + router.urls
