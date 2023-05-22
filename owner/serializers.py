@@ -9,7 +9,7 @@ class BusinessOwnerSerializer(serializers.ModelSerializer):
     class Meta:
         model = BusinessOwner
         fields = '__all__'
-        read_only_fields = ('id', 'created_at', 'updated_at')
+        read_only_fields = ('id', 'created_at')
 
     # def update(self, instance, validated_data):
     #     if instance.verification_code == validated_data.get('verification_code'):
