@@ -30,6 +30,8 @@ urlpatterns = [
                   path('stores/<int:store_id>/tables/<int:table_number>/last-order/', order.LastOrderView.as_view()),
                   path('product/<int:product_id>/average-rating/', comment.ProductRatingAPIView.as_view(),
                        name='product-average-rating'),
+                  path('orders/<int:order_id>/productsName/', order.OrderProductNameListAPIView.as_view(),
+                       name='order-product_name-list'),
                   path('orders/<int:order_id>/productsID/', order.OrderProductIdListAPIView.as_view(),
                        name='order-product_id-list'),
                   path('product/<int:product_id>/rating/',comment.ProductRatingAPIView.as_view(), name='product-rating'),

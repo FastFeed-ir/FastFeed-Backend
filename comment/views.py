@@ -22,7 +22,7 @@ class CommentViewSet(ModelViewSet):
 
 class OrderCommentViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = OrderCommentSerializer
-
+    permission_classes = [IsAuthenticated]
     def get_queryset(self):
         product_id = self.request.query_params.get('product_id')
         if not product_id:
@@ -56,6 +56,7 @@ class RatingViewSet(ModelViewSet):
 
 
 class ProductRatingAPIView(APIView):
+    permission_classes = [IsAuthenticated]
     def get_product(self, product_id):
         try:
             return Product.objects.get(id=product_id)

@@ -31,6 +31,7 @@ class LastOrderView(APIView):
 
 
 class OrderProductIdListAPIView(APIView):
+    permission_classes = [IsAuthenticated]
     def get(self, request, order_id):
         order_items = OrderItem.objects.filter(order_id=order_id)
         if order_items:
@@ -41,6 +42,7 @@ class OrderProductIdListAPIView(APIView):
 
 
 class OrderProductNameListAPIView(APIView):
+    permission_classes = [IsAuthenticated]
     def get(self, request, order_id):
         try:
             order = Order.objects.get(id=order_id)
