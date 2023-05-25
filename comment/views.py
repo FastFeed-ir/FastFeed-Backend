@@ -8,6 +8,7 @@ from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 
 from menu.models import Product
+from store.models import Store
 from .models import Comment, Rating
 from .serializers import RatingSerializer, CommentSerializer, OrderCommentSerializer
 
@@ -54,6 +55,36 @@ class RatingViewSet(ModelViewSet):
     filterset_fields = ['product_id']
     permission_classes = [IsAuthenticated]
     ordering_fields = '__all__'
+
+
+class StoreRatingAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get_store(self, store_id):
+        try:
+            return Store.objects.get(id=store_id)
+        except Store.DoesNotExist:
+            raise Http404("Store not found.")
+
+    def get(self, request, store_id):
+        store = self.get_store(store_id)
+        try:
+            comments = Comment.objects.filter(store=store)
+            comment_count = comments.count()
+
+            ratings = Rating.objects.filter(product__store=store)
+            rating_count = ratings.count()
+            average_rating = ratings.aggregate(Avg('score'))['score__avg']
+            average_rating = round(average_rating, 2) if average_rating else None
+
+            data = {
+                'comment_count': comment_count,
+                'rating_count': rating_count,
+                'average_rating': average_rating,
+            }
+            return Response(data)
+        except (Comment.DoesNotExist, Rating.DoesNotExist):
+            raise Http404("No data found for this store.")
 
 
 class ProductRatingAPIView(APIView):

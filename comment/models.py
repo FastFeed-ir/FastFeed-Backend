@@ -24,6 +24,7 @@ class Comment(models.Model):
             now_local = timezone.now()
             now_jdatetime = jdatetime_datetime.fromgregorian(datetime=now_local)
             self.created_at = now_jdatetime.strftime('%Y/%m/%d %H:%M:%S')
+            self.store=self.order.store
         super().save(*args, **kwargs)
 
     def __str__(self):

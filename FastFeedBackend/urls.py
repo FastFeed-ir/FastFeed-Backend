@@ -38,4 +38,5 @@ urlpatterns = [
                        name='product-rating'),
                   path('order-comments/', comment.OrderCommentViewSet.as_view({'get': 'list'}),
                        name='order-comment-list'),
+                  path('stores/<int:store_id>/ratings/', comment.StoreRatingAPIView.as_view(), name='store-ratings'),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + router.urls
