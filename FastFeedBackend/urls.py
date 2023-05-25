@@ -28,6 +28,7 @@ urlpatterns = [
                   path('api-token-auth/', views.obtain_auth_token),
                   path('api-auth/', include('rest_framework.urls')),
                   path('stores/<int:store_id>/tables/<int:table_number>/last-order/', order.LastOrderView.as_view()),
+                  path('orders/<int:order_id>/total/', order.OrderTotalPriceAPIView.as_view(), name='order-total'),
                   path('product/<int:product_id>/average-rating/', comment.ProductRatingAPIView.as_view(),
                        name='product-average-rating'),
                   path('orders/<int:order_id>/productsName/', order.OrderProductNameListAPIView.as_view(),

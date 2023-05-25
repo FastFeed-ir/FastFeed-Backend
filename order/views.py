@@ -1,3 +1,4 @@
+from django.http import Http404
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -49,7 +50,7 @@ class OrderProductNameListAPIView(APIView):
         try:
             order = Order.objects.get(id=order_id)
         except Order.DoesNotExist:
-            return Response({'message': 'Order not found.'}, status=404)
+            raise Http404('Order not found.')
 
         order_items = OrderItem.objects.filter(order=order)
         product_ids = [order_item.product_id for order_item in order_items]
@@ -57,6 +58,21 @@ class OrderProductNameListAPIView(APIView):
         product_names = [product.title for product in products]
 
         return Response({'product_names': product_names})
+
+
+class OrderTotalPriceAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, order_id):
+        try:
+            order = Order.objects.get(id=order_id)
+        except Order.DoesNotExist:
+            raise Http404('Order not found.')
+
+        order_items = OrderItem.objects.filter(order=order)
+        total_price = sum(item.product_unit_price * item.quantity for item in order_items)
+
+        return Response({'total_price': total_price})
 
 
 class OrderItemViewSet(ModelViewSet):
