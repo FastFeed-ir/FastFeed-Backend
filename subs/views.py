@@ -10,6 +10,6 @@ class SubscriptionViewSet(ModelViewSet):
     queryset = Subscription.objects.all()
     serializer_class = SubscriptionSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['store_id']
+    filterset_fields = ['business_owner']
     permission_classes = [IsAuthenticated]
     ordering_fields = '__all__'
