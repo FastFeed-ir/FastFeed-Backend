@@ -8,6 +8,8 @@ from store import models as store
 
 class Subscription(models.Model):
     store = models.ForeignKey(store.Store, on_delete=models.CASCADE, verbose_name="فروشگاه")
+    store_title = models.CharField(max_length=31, blank=True, editable=False,
+                                     verbose_name="نام فروشگاه(به صورت خودکار افزوده میشود)")
     period = models.PositiveIntegerField(verbose_name="دوره زمانی(به روز)")
     amount = models.DecimalField(max_digits=15, decimal_places=3, verbose_name="قیمت کل(به تومان)")
     url = models.CharField(blank=True, max_length=63,
@@ -30,6 +32,7 @@ class Subscription(models.Model):
             self.created_at = now_jdatetime.strftime('%Y/%m/%d %H:%M:%S')
             self.url = f"http://FastFeed.ir/{self.store.business_type}/{self.store.id}/"
             self.business_owner = self.store.business_owner
+            self.store_title=self.store.title
         else:
             now_local = timezone.now()
             now_jdatetime = jdatetime_datetime.fromgregorian(datetime=now_local)
