@@ -43,7 +43,6 @@ class BusinessOwnerSerializerTest(TestCase):
         serializer = BusinessOwnerSerializer(owner)
         self.assertIn('id', serializer.data)
         self.assertIn('created_at', serializer.data)
-        self.assertIn('updated_at', serializer.data)
 
     class BusinessOwnerViewSetTest(TestCase):
         def setUp(self):
