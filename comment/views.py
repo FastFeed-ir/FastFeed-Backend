@@ -78,6 +78,7 @@ class StoreRatingAPIView(APIView):
             average_rating = round(average_rating, 2) if average_rating else None
 
             data = {
+                'name': store.title,
                 'comment_count': comment_count,
                 'rating_count': rating_count,
                 'average_rating': average_rating,
