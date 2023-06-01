@@ -19,20 +19,24 @@ class Subscription(models.Model):
                                        verbose_name="مالک فروشگاه(به صورت خودکار افزوده میشود)")
     created_at = models.CharField(max_length=31, null=True, blank=True, verbose_name="زمان ثبت")
     updated_at = models.CharField(max_length=31, null=True, blank=True, verbose_name="زمان بروزرسانی")
-
+    end_date = models.DateTimeField(blank=True, null=True, verbose_name="تاریخ پایان", editable=False)
     class Meta:
         verbose_name_plural = "اشتراک ها"
         verbose_name = "اشتراک"
+    def  calculate_end_date(self):
+        now = timezone.now()
+        end_date = now + timezone.timedelta(days=self.period)
+        return end_date
 
     def save(self, *args, **kwargs):
-
         if not self.id:
             now_local = timezone.now()
             now_jdatetime = jdatetime_datetime.fromgregorian(datetime=now_local)
             self.created_at = now_jdatetime.strftime('%Y/%m/%d %H:%M:%S')
             self.url = f"http://FastFeed.ir/{self.store.business_type}/{self.store.id}/"
             self.business_owner = self.store.business_owner
-            self.store_title=self.store.title
+            self.store_title = self.store.title
+            self.end_date = self.calculate_end_date()
         else:
             now_local = timezone.now()
             now_jdatetime = jdatetime_datetime.fromgregorian(datetime=now_local)
