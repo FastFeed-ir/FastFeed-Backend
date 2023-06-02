@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from jdatetime import datetime as jdatetime_datetime
-
+from owner.models import BusinessOwner
 from store.models import Store
 
 
