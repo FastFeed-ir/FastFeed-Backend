@@ -8,7 +8,7 @@ from store.models import Store
 class Collection(models.Model):
     store = models.ForeignKey(Store, on_delete=models.CASCADE, related_name='collections', verbose_name="فروشگاه")
     title = models.CharField(max_length=31, verbose_name="عنوان")
-    is_featured = models.BooleanField(default=False, verbose_name="پیشنهادی بودن(اختیاری)")
+    is_featured = models.BooleanField(default=False, verbose_name="پیشنهادی بودن(اختیاری)", null=True, blank=True)
 
     created_at = models.CharField(max_length=31, null=True, blank=True, verbose_name="زمان ثبت")
 
