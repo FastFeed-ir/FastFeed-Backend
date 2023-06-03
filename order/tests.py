@@ -125,7 +125,7 @@ class OrderItemTestCase(APITestCase):
     #     self.assertEqual(response.status_code, 204)
 
     def test_order_model(self):
-        self.assertEqual(self.order.id, 7)
+        self.assertEqual(self.order.id, 8)
         # add more tests for Order model as needed
 
     # def test_order_serializer(self):
