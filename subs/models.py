@@ -31,7 +31,7 @@ class Subscription(models.Model):
             now_local = timezone.now()
             now_jdatetime = jdatetime_datetime.fromgregorian(datetime=now_local)
             self.created_at = now_jdatetime.strftime('%Y/%m/%d %H:%M:%S')
-            self.url = f"http://FastFeed.ir/{self.store.business_type}/{self.store.id}/"
+            self.url = f"http://fastfeed.ir/{self.store.business_type}/{self.store.id}/"
             self.business_owner = self.store.business_owner
             self.end_date = self.calculate_end_date()
         else:
